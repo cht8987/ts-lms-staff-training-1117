@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top Scholar LMS 新系统员工实操完整教程</title>
+  <style>
+    :root {
+      --bg: #0C1017;
+      --surface: #141A26;
+      --surface-elevated: #1C2436;
+      --gold: #BA8145;
+      --gold-light: #E0AC75;
+      --gold-glow: rgba(186, 129, 69, 0.25);
+      --text: #F0F4FA;
+      --text-muted: #9AA5B8;
+      --border: rgba(186, 129, 69, 0.22);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --red: #E53E3E;
+      --green: #38A169;
+      --blue: #3182CE;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.6;
+      padding-top: 60px;
+    }
+
+    /* Fixed Navbar */
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: rgba(12, 16, 23, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      z-index: 1000;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 17px;
+      color: #fff;
+    }
+    .brand-pill {
+      background: linear-gradient(135deg, var(--gold), #7A4E1B);
+      color: #fff;
+      padding: 3px 10px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: #fff;
+      border: 1px solid var(--gold);
+    }
+    .btn-gold:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+    }
+    .btn-outline {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+
+    /* Layout */
+    .layout-container {
+      display: flex;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px;
+      gap: 32px;
+    }
+
+    /* Sidebar Table of Contents */
+    .sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 84px;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .sidebar-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .sidebar-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sidebar-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      display: block;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+    .sidebar-nav a:hover, .sidebar-nav a.active {
+      background: var(--surface-elevated);
+      color: var(--gold-light);
+      border-left: 3px solid var(--gold);
+    }
+
+    /* Main Content */
+    .main-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .hero-banner {
+      background: linear-gradient(180deg, var(--surface-elevated), var(--surface));
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px;
+      margin-bottom: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(186, 129, 69, 0.2);
+      border: 1px solid var(--border);
+      color: var(--gold-light);
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    .hero-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .hero-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 800px;
+    }
+
+    /* Topic Module Section */
+    .topic-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+    .topic-header {
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+    .topic-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .topic-number {
+      background: var(--gold);
+      color: #000;
+      font-weight: 900;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .role-badge {
+      background: var(--surface-elevated);
+      color: #A0AEC0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .topic-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .topic-summary {
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    /* Step Item */
+    .step-card {
+      background: var(--surface-elevated);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 22px;
+      margin-bottom: 24px;
+    }
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .step-badge {
+      background: var(--gold);
+      color: #0A0D14;
+      font-weight: 900;
+      font-size: 13px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .step-desc {
+      font-size: 14px;
+      color: #CBD5E0;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+    .step-desc strong {
+      color: var(--gold-light);
+    }
+    .step-image-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #000;
+      margin-top: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    .step-image-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: zoom-in;
+    }
+    .step-image-caption {
+      padding: 8px 14px;
+      background: rgba(0,0,0,0.6);
+      font-size: 12px;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* Interactive Tour Widget (Option A) */
+    .tour-widget {
+      background: #0E131E;
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 28px 0;
+      box-shadow: 0 0 25px var(--gold-glow);
+    }
+    .tour-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .tour-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tour-controls {
+      display: flex;
+      gap: 8px;
+    }
+    .tour-stage {
+      position: relative;
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #000;
+    }
+    .tour-stage img {
+      width: 100%;
+      display: block;
+    }
+    .tour-spotlight {
+      position: absolute;
+      border: 3px solid #FFD700;
+      box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.65), 0 0 20px #FFD700;
+      border-radius: 8px;
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      pointer-events: none;
+    }
+    .tour-bubble {
+      position: absolute;
+      background: var(--surface-elevated);
+      border: 1px solid var(--gold);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      max-width: 320px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.8);
+      z-index: 10;
+      transition: all 0.4s ease;
+    }
+
+    /* Caution Box */
+    .caution-box {
+      background: rgba(229, 62, 62, 0.08);
+      border-left: 4px solid var(--red);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 18px;
+      font-size: 14px;
+      color: #FEB2B2;
+    }
+    .caution-box strong {
+      color: #FFF;
+    }
+    .tip-box {
+      background: rgba(186, 129, 69, 0.08);
+      border-left: 4px solid var(--gold);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 18px;
+      font-size: 14px;
+      color: var(--gold-light);
+    }
+
+    /* Print Styles */
+    @media print {
+      body { background: #fff !important; color: #000 !important; padding-top: 0 !important; }
+      .top-nav, .sidebar, .tour-widget, .nav-actions { display: none !important; }
+      .layout-container { display: block !important; width: 100% !important; padding: 0 !important; margin: 0 !important; }
+      .topic-section { background: #fff !important; border: 1px solid #ccc !important; page-break-after: always; padding: 20px !important; color: #000 !important; }
+      .topic-title, .step-title, .hero-title { color: #000 !important; }
+      .step-card { background: #f9f9f9 !important; border: 1px solid #ddd !important; color: #000 !important; }
+      .step-desc { color: #333 !important; }
+      .step-image-box { border: 1px solid #ccc !important; }
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 900px) {
+      .layout-container { flex-direction: column; padding: 14px; }
+      .sidebar { display: none; }
+      .hero-title { font-size: 24px; }
+      .topic-title { font-size: 20px; }
+      .top-nav { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <div class="nav-brand">
+      <span class="brand-pill">TOP SCHOLAR</span>
+      <span>新系统员工实战教程</span>
+    </div>
+    <div class="nav-actions">
+      <a href="slides.html" class="btn btn-outline">🖥️ 播放网页简报</a>
+      <button class="btn btn-gold" onclick="window.print()">📥 下载完整教程 (PDF)</button>
+    </div>
+  </nav>
+
+  <div class="layout-container">
+
+    <!-- Sticky Table of Contents -->
+    <aside class="sidebar">
+      <div class="sidebar-title">教程导航目录</div>
+      <ul class="sidebar-nav">
+        <li><a href="#hero">培训综述与系统入口</a></li>
+        <li><a href="#topic-1">1. Enrolment 销售录单</a></li>
+        <li><a href="#topic-2">2. 学生页面怎样换（换班调课）</a></li>
+        <li><a href="#topic-3">3. 功课作业系统（批改与提交）</a></li>
+        <li><a href="#topic-4">4. Students Behaviour 学生表现</a></li>
+        <li><a href="#topic-5">5. 学生 Email 与密码管理</a></li>
+        <li><a href="#topic-6">6. Bana Games 免密进入</a></li>
+        <li><a href="#faq">常见问题与操作红线</a></li>
+      </ul>
+      <div style="margin-top: 24px; font-size: 12px; color: var(--text-muted); line-height: 1.5; border-top: 1px solid var(--border-subtle); padding-top: 14px;">
+        💡 内部系统网址：<br>
+        <code style="color:var(--gold-light);">https://lms.topscholar.edu.my</code><br>
+        测试学生学号：<br>
+        TS-011960 / TS-016493
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-body">
+
+      <!-- Hero Header -->
+      <section class="hero-banner" id="hero">
+        <span class="hero-badge">OFFICIAL STAFF TRAINING GUIDE</span>
+        <h1 class="hero-title">Top Scholar LMS 员工操作完整教程</h1>
+        <p class="hero-desc">
+          本教程涵盖 LMS 新系统的六大核心业务流程。所有操作步骤均配备实操标注截图与互动导览，帮助销售顾问（Sales）、授课老师（Teacher）与关怀团队（Care）快速掌握新系统。
+        </p>
+      </section>
+
+      <!-- Topic 1: Enrolment 录单 -->
+      <section class="topic-section" id="topic-1">
+        <div class="topic-header">
+          <div class="topic-meta">
+            <span class="topic-number">TOPIC 1</span>
+            <span class="role-badge">Sales 销售 / Admin 管理层 / Finance 财务</span>
+          </div>
+          <h2 class="topic-title">1. Enrolment 销售录单全流程</h2>
+          <p class="topic-summary">
+            功能定位：处理学生报名、学期配套签约、加购科目、登记收款凭证并自动开立官方 PDF 发票。
+          </p>
+        </div>
+
+        <!-- Step 1.1 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">1</span>
+            <h3 class="step-title">进入后台 Enrolments 列表，开启录单</h3>
+          </div>
+          <div class="step-desc">
+            登录员工后台后，在左侧选单点击「CRM Sales」→「Enrolments」。在列表右上角点击 <strong>「New Enrolment」</strong> 按钮，进入一屏录单界面。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_01_enrolment_list.png" alt="Enrolment List" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 1.1：销售录单列表总览与「New Enrolment」入口</div>
+          </div>
+        </div>
+
+        <!-- Step 1.2 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">2</span>
+            <h3 class="step-title">贴上家长资料让 AI 自动拆解（Paste & Parse）</h3>
+          </div>
+          <div class="step-desc">
+            在「Paste & Parse」文本框直接贴上家长在 WhatsApp 发来的原始报名文字，点击 <strong>「Parse」</strong> 按钮。系统将自动智能提取家长姓名、联络电话、学生姓名与年级，并自动匹配是否为系统已有老家长。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_02_enrolment_ai_parse.png" alt="AI Parse" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 1.2：贴上家长文字自动识别并填入对应表单栏位</div>
+          </div>
+        </div>
+
+        <!-- Step 1.3 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">3</span>
+            <h3 class="step-title">选定学期配套（Terms）与加选科目（Add-on）</h3>
+          </div>
+          <div class="step-desc">
+            选择报读的学期配套（如 2026-11 预习班或正课配套），系统自动载入标准必修科目与时段。若家长需加选单科或实体教材，在下方 <strong>「Add-on 加购」</strong> 区块勾选，系统自动计算多科组合优惠价。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_03_enrolment_packages.png" alt="Packages & Addons" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 1.3：选择主配套学期、排课时段与加购科目</div>
+          </div>
+        </div>
+
+        <!-- Step 1.4 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">4</span>
+            <h3 class="step-title">登记收款凭证与送出前确认</h3>
+          </div>
+          <div class="step-desc">
+            选择付款方式（Bank Transfer / FPX / 信用卡），输入银行转账参考号（Reference No），并上传转账收据截图。核对应付与实付金额一致后，点击 <strong>「Save」</strong> 按钮完成录单建档。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_04_enrolment_payment.png" alt="Payment & Save" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 1.4：登记支付方式、上传汇款收据并确认金额（送出前画面）</div>
+          </div>
+        </div>
+
+        <!-- Step 1.5 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">5</span>
+            <h3 class="step-title">单据详情、付款记录与发票开立</h3>
+          </div>
+          <div class="step-desc">
+            建单成功后自动跳转至单据详情页（Detail）。可切换至「Payments」查看核账状态，或点击「Invoice」查看官方带章发票，并可一键点击 <strong>「Send Invoice via WhatsApp」</strong> 将发票直发家长。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_05_enrolment_invoice.png" alt="Invoice" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 1.5：单据发票详情页与 WhatsApp 直发功能</div>
+          </div>
+        </div>
+
+        <!-- Interactive Tour Widget -->
+        <div class="tour-widget" id="tour-topic-1">
+          <div class="tour-header">
+            <div class="tour-title">
+              <span>🎯 动态导览演示：销售录单五大关键节点</span>
+            </div>
+            <div class="tour-controls">
+              <button class="btn btn-outline" onclick="prevTour(1)">上一步</button>
+              <button class="btn btn-gold" onclick="nextTour(1)">下一步</button>
+            </div>
+          </div>
+          <div class="tour-stage" id="tour-stage-1" style="height: 480px;">
+            <img src="assets/annotated/ann_02_enrolment_ai_parse.png" id="tour-img-1" alt="Tour 1">
+            <div class="tour-spotlight" id="tour-spot-1" style="top:18%; left:18%; width:42%; height:32%;"></div>
+            <div class="tour-bubble" id="tour-bubble-1" style="top:52%; left:20%;">
+              <strong>① 贴上文本：</strong>将 WhatsApp 对话整段贴进左侧，点击 Parse 拆解。
+            </div>
+          </div>
+        </div>
+
+        <div class="caution-box">
+          <strong>🔴 录单操作红线：</strong>在正式系统录单时，一旦点击「Save」即会正式生成账单并开通课程学籍。测试练习时请务必使用测试学生（TS-011960），不可使用真实学生资料建单！
+        </div>
+      </section>
+
+      <!-- Topic 2: 学生页面怎样换 -->
+      <section class="topic-section" id="topic-2">
+        <div class="topic-header">
+          <div class="topic-meta">
+            <span class="topic-number">TOPIC 2</span>
+            <span class="role-badge">Care 关怀顾问 / Sales / 授课老师</span>
+          </div>
+          <h2 class="topic-title">2. 学生页面怎样换（换班 / 换时间 / 转课）</h2>
+          <p class="topic-summary">
+            功能定位：在学生档案页面，管理学生的学籍称号、班级组别，以及处理永久调整时段（Change Time）、单堂临时补课（Swap Class）与跨期转班（Transfer）。
+          </p>
+        </div>
+
+        <!-- Step 2.1 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">1</span>
+            <h3 class="step-title">学生档案页与 Title & Group 称号组别卡</h3>
+          </div>
+          <div class="step-desc">
+            进入学生主页（<code>/admin/ts-crm/students/{id}</code>），上方展示学生学号、年级与「Title & Group」称号卡（如组号、状元徽、称号）。<strong>注意：</strong>老师在 Zoom 课室看到的学生进场名字与此称号同源！
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_06_student_profile.png" alt="Student Profile" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 2.1：学生档案卡与 Title & Group 称号组别显示</div>
+          </div>
+        </div>
+
+        <!-- Step 2.2 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">2</span>
+            <h3 class="step-title">「Change Time」正课永久换时段</h3>
+          </div>
+          <div class="step-desc">
+            若学生上学时段改变需长期调整，在 Classes 栏目点击 <strong>「Change Time」</strong>。选择同科目平行班级的新时段，系统自动检查学额与时间冲突，按 <strong>「Confirm Change」</strong> 后后续所有课次一并迁移。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_08_change_time.png" alt="Change Time" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 2.2：永久更换上课时间与冲突排查</div>
+          </div>
+        </div>
+
+        <!-- Step 2.3 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">3</span>
+            <h3 class="step-title">「Swap Class」单堂临时调课</h3>
+          </div>
+          <div class="step-desc">
+            针对学生因病假、事假仅缺席某一堂课的情况，点击 <strong>「Swap Class」</strong>。指定要对调的具体某一堂课次，选择目标补课班级。系统仅为该次生成补课 Zoom 权限，不影响学生的整期主班级。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_09_swap_class.png" alt="Swap Class" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 2.3：指定课次单堂临时调换</div>
+          </div>
+        </div>
+
+        <!-- Step 2.4 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">4</span>
+            <h3 class="step-title">「Transfer」转课程与转学期</h3>
+          </div>
+          <div class="step-desc">
+            如果学生需要跨年级转班（例如由 Y1-Y3 转至 Y4-Y6）或跨科目转换，点击 <strong>「Transfer」</strong>。系统会自动核算已上课次、结转剩余学费差额，并无缝迁入学籍。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_07_student_classes_actions.png" alt="Class Actions" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 2.4：学生在读课程右侧的操作按钮集</div>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>💡 业务区分要点：</strong>遇到家长说「这周请假想补课」，一律使用「Swap Class」；只有家长明确说「以后都要换到星期四上课」，才使用「Change Time」。
+        </div>
+      </section>
+
+      <!-- Topic 3: 功课作业系统 -->
+      <section class="topic-section" id="topic-3">
+        <div class="topic-header">
+          <div class="topic-meta">
+            <span class="topic-number">TOPIC 3</span>
+            <span class="role-badge">授课老师 / 助教 / 学生 / 家长</span>
+          </div>
+          <h2 class="topic-title">3. 功课作业系统（老师批改 + 学生提交）</h2>
+          <p class="topic-summary">
+            功能定位：布置作业、口说 Speaking 录音、老师在线画记批改评分、退回订正（Return for redo）与学生端三态管理。
+          </p>
+        </div>
+
+        <!-- Step 3.1 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">1</span>
+            <h3 class="step-title">老师端功课列表与跨期筛选（/admin/ts-homework）</h3>
+          </div>
+          <div class="step-desc">
+            老师可在后台「TS 作业与批改」总览所有布置的作业，按科目、年级和截止日期快速筛选，并可进入「Assignation」指派作业批改人。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_10_homework_admin_list.png" alt="Admin Homework List" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 3.1：老师端功课管理列表与批改状态追踪</div>
+          </div>
+        </div>
+
+        <!-- Step 3.2 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">2</span>
+            <h3 class="step-title">功课设定：File types 多选与 Speaking 录音</h3>
+          </div>
+          <div class="step-desc">
+            布置作业时，<strong>「File types」可以多选</strong>（同时勾选 Photo 与 Document）。若作业包含课文朗读或口语练习，<strong>必须勾选「Speaking」</strong>，学生端才会启用录音麦克风。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_11_homework_options.png" alt="Homework Options" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 3.2：作业创建设定中的 File types 多选与 Speaking 勾选开关</div>
+          </div>
+        </div>
+
+        <!-- Step 3.3 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">3</span>
+            <h3 class="step-title">老师端在线批改、退回重交与发成绩</h3>
+          </div>
+          <div class="step-desc">
+            在 Marking 批改台，老师可在学生作业照片上使用红笔画记批改、直接在线播放学生录音、填写评语分数。若作业未达标，可按 <strong>「Return for redo」</strong> 退回重交；若满意则按 <strong>「Release」</strong> 正式发布成绩。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_12_homework_grading.png" alt="Homework Grading" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 3.3：批改台动作按钮（Save / Release / Return for redo）</div>
+          </div>
+        </div>
+
+        <!-- Step 3.4 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">4</span>
+            <h3 class="step-title">学生端三态管理：「要交 / 批改中 / 改好了」</h3>
+          </div>
+          <div class="step-desc">
+            学生进入个人中心「Homeworks」，作业清晰分为三态：<br>
+            • <strong>「要交」：</strong>待提交的作业，带有截止时间提醒。<br>
+            • <strong>「批改中」：</strong>已提交等待老师批阅，老师批改前学生仍可「修改提交」（Edit/Change Homework Submission）。<br>
+            • <strong>「改好了」：</strong>已完成批改，可查看红笔点评与得分。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_13_student_hw_desktop.png" alt="Student Homework Desktop" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 3.4：学生端作业中心三态标签与卡片展示</div>
+          </div>
+        </div>
+
+        <!-- Step 3.5 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">5</span>
+            <h3 class="step-title">手机端拍照与 Speaking 录音提交</h3>
+          </div>
+          <div class="step-desc">
+            学生使用手机打开系统，点击作业卡片即可直接唤起手机相机拍照上传作业簿；若为 Speaking 作业，点击麦克风图标即可录音朗读，提交后学生自动获得 <strong>成长等级 +20 积分</strong>！
+          </div>
+          <div class="step-image-box" style="max-width: 420px; margin: 12px auto;">
+            <img src="assets/annotated/ann_14_student_hw_mobile.png" alt="Student Homework Mobile" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 3.5：手机端极简拍照上传与录音界面</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Topic 4: Students Behaviour -->
+      <section class="topic-section" id="topic-4">
+        <div class="topic-header">
+          <div class="topic-meta">
+            <span class="topic-number">TOPIC 4</span>
+            <span class="role-badge">授课老师 / Care 关怀教练</span>
+          </div>
+          <h2 class="topic-title">4. Students Behaviour 学生课堂表现</h2>
+          <p class="topic-summary">
+            功能定位：Class Records 课堂考勤打卡、学生积极度加分、小组积分竞赛（Group Points）与 Care 关怀名单。
+          </p>
+        </div>
+
+        <!-- Step 4.1 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">1</span>
+            <h3 class="step-title">Class Records 课堂考勤点名（/admin/ts-care/class-records）</h3>
+          </div>
+          <div class="step-desc">
+            进入 Class Records 页面，选择对应的年段卡片（如 Y1-Y3）与学期，点击具体班级格子进入点名册，实时登记学生出席、迟到、缺席状态。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_15_class_records_list.png" alt="Class Records List" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 4.1：按年段与班级网格进入课堂考勤</div>
+          </div>
+        </div>
+
+        <!-- Step 4.2 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">2</span>
+            <h3 class="step-title">组别积分（Group Points）与课堂加减分</h3>
+          </div>
+          <div class="step-desc">
+            在点名册右侧的加分面板，老师可为表现积极的学生个人或小组（如 Group 1、Group 2）增加积分。积分实时同步至排行榜，下课后自动结转为勋章与成长值。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_16_class_records_roster.png" alt="Class Records Roster" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 4.2：学生花名册与实时组别加分面板</div>
+          </div>
+        </div>
+
+        <!-- Step 4.3 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">3</span>
+            <h3 class="step-title">Care 关心名单（/admin/ts-care）与电访跟进</h3>
+          </div>
+          <div class="step-desc">
+            当学生出现连续缺课或作业长期未交时，系统自动将该学生推入 Care 关心名单。Care 教练在联系家长后，直接在档案中记录 Follow-up 笔记，全校顾问皆可查阅关怀历程。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_17_care_student.png" alt="Care Student" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 4.3：Care 关怀指标与电访跟进记录</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Topic 5: 学生 Email 与密码管理 -->
+      <section class="topic-section" id="topic-5">
+        <div class="topic-header">
+          <div class="topic-meta">
+            <span class="topic-number">TOPIC 5</span>
+            <span class="role-badge">客服人员 / Care / 学生 / 家长</span>
+          </div>
+          <h2 class="topic-title">5. 学生 Email 与密码管理</h2>
+          <p class="topic-summary">
+            功能定位：学生账号认证核心规则。规范员工帮学生改密与学生自主找回密码流程。
+          </p>
+        </div>
+
+        <!-- Step 5.1 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">1</span>
+            <h3 class="step-title">员工帮学生改：修改登入 ID（Email）与重设密码</h3>
+          </div>
+          <div class="step-desc">
+            在学生档案页点击「Edit」进入编辑页。<strong>重要铁律：学生的登入 ID 就是 Email！</strong>若改动了 Email 栏位，等同于修改了登入账号；若家长忘记密码，员工可在「New Password」栏填入新密码后按 Save 重设。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_18_admin_edit_credentials.png" alt="Admin Edit Credentials" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 5.1：学生编辑档案中的 Email 登入账号与重设密码栏位</div>
+          </div>
+          <div class="caution-box">
+            <strong>⚠️ 必须通知家长：</strong>更改学生 Email 后，必须第一时间通过 WhatsApp 发送通知告知家长「您的登入账号已更新为新 Email」，避免家长反复以旧账号登入导致失败！
+          </div>
+        </div>
+
+        <!-- Step 5.2 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">2</span>
+            <h3 class="step-title">学生自己改：学生端 Setting 页面自主修改密码</h3>
+          </div>
+          <div class="step-desc">
+            学生登入学生端后，点击右上角头像进入 <strong>「Setting」</strong>，在安全与密码区域输入旧密码与新密码，即可自主完成修改。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_19_student_setting_pwd.png" alt="Student Setting Password" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 5.2：学生端自主修改密码界面</div>
+          </div>
+        </div>
+
+        <!-- Step 5.3 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">3</span>
+            <h3 class="step-title">忘记密码流程：登入页「Forgot password?」</h3>
+          </div>
+          <div class="step-desc">
+            在登入界面点击 <strong>「Forgot password?」</strong> 进入 <code>/forget-password</code>，输入登记的 Email。系统将自动发送带有安全 Token 的密码重置信件，家长点击信中链接即可重设。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_20_forget_password.png" alt="Forget Password" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 5.3：公开的忘记密码重设信件触发页</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Topic 6: Bana Games 进入方式 -->
+      <section class="topic-section" id="topic-6">
+        <div class="topic-header">
+          <div class="topic-meta">
+            <span class="topic-number">TOPIC 6</span>
+            <span class="role-badge">学生体验 / 教学闭环</span>
+          </div>
+          <h2 class="topic-title">6. Bana Games 进入方式</h2>
+          <p class="topic-summary">
+            功能定位：Top Scholar 专属游戏化学习世界。单点登录自动开号，无缝结合单词挑战与课堂复习。
+          </p>
+        </div>
+
+        <!-- Step 6.1 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">1</span>
+            <h3 class="step-title">学生端首页 Bana Games 专属入口</h3>
+          </div>
+          <div class="step-desc">
+            学生成功登入个人中心主页（<code>/panel</code>）后，在页面显著位置即可看到「Bana Games」入口卡片。点击按钮直接进入单点登录通道（<code>/bana/go</code>）。
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_21_student_bana_entry.png" alt="Bana Entry" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 6.1：学生端个人首页的 Bana Games 免密直通入口卡片</div>
+          </div>
+        </div>
+
+        <!-- Step 6.2 -->
+        <div class="step-card">
+          <div class="step-header">
+            <span class="step-badge">2</span>
+            <h3 class="step-title">首次进入自动开号，无缝进入 Bana World</h3>
+          </div>
+          <div class="step-desc">
+            学生无需二次输入任何账号或密码。若该学生是第一次玩，系统后台会在 0.5 秒内自动创建 Bana 游戏账户，学生直接进入 Bana World 开启单词挑战！
+          </div>
+          <div class="step-image-box">
+            <img src="assets/annotated/ann_22_bana_world.png" alt="Bana World" onclick="zoomImage(this)">
+            <div class="step-image-caption">图 6.2：单点登录自动载入的 Bana World 游戏主城界面</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ & Rules -->
+      <section class="topic-section" id="faq">
+        <div class="topic-header">
+          <div class="topic-meta">
+            <span class="topic-number">FAQ</span>
+            <span class="role-badge">全员必读</span>
+          </div>
+          <h2 class="topic-title">常见问题与操作纪律守则</h2>
+        </div>
+        <div class="step-card">
+          <h3 class="step-title" style="color:var(--gold-light); margin-bottom:8px;">Q1：学生反映登入不到系统，最常见的原因是什么？</h3>
+          <p class="step-desc">
+            <strong>答：</strong>95% 是因为员工在后台更改了学生的 Email（登入 ID），但家长依然使用旧 Email 登入。请第一时间核对后台学生的真实 Email 栏位，并确认是否拼写错误。
+          </p>
+        </div>
+        <div class="step-card">
+          <h3 class="step-title" style="color:var(--gold-light); margin-bottom:8px;">Q2：布置了朗读作业，为什么学生手机端没有出现录音按钮？</h3>
+          <p class="step-desc">
+            <strong>答：</strong>老师在布置作业时遗漏勾选「Speaking」复选框。只要勾选该项，学生端手机就会自动点亮麦克风按钮并开启录音功能。
+          </p>
+        </div>
+        <div class="step-card">
+          <h3 class="step-title" style="color:var(--gold-light); margin-bottom:8px;">Q3：测验与考试（Quiz）怎么导入？</h3>
+          <p class="step-desc">
+            <strong>答：</strong>Quiz 与考试系统有专属的批量导入规范与成绩同步机制，本次培训集中于日常六大运营模块，测验模块将由 Elson 于下周专题培训中进行专项拆解。
+          </p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:9999; align-items:center; justify-content:center; cursor:zoom-out;" onclick="this.style.display='none'">
+    <img id="lightbox-img" src="" style="max-width:95vw; max-height:95vh; border-radius:8px; box-shadow:0 0 50px rgba(0,0,0,0.9);">
+  </div>
+
+  <script>
+    function zoomImage(img) {
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+
+    // Interactive Tour Logic
+    const tourSteps = [
+      { top: "18%", left: "18%", width: "42%", height: "32%", bubbleTop: "52%", bubbleLeft: "20%", text: "① 贴上原始文本：将家长 WhatsApp 对话整段贴进左侧文本框。" },
+      { top: "18%", left: "62%", width: "36%", height: "32%", bubbleTop: "52%", bubbleLeft: "55%", text: "② AI 智能拆解：点击 Parse，自动提取姓名、电话、年级与科目。" },
+      { top: "45%", left: "18%", width: "42%", height: "15%", bubbleTop: "62%", bubbleLeft: "20%", text: "③ 匹配老生：根据联络电话自动核对是否为已有家长，杜绝重复录单！" }
+    ];
+    let curTour = 0;
+
+    function updateTour() {
+      const s = tourSteps[curTour];
+      const spot = document.getElementById('tour-spot-1');
+      const bubble = document.getElementById('tour-bubble-1');
+      spot.style.top = s.top;
+      spot.style.left = s.left;
+      spot.style.width = s.width;
+      spot.style.height = s.height;
+      bubble.style.top = s.bubbleTop;
+      bubble.style.left = s.bubbleLeft;
+      bubble.innerHTML = s.text;
+    }
+
+    function nextTour(id) {
+      curTour = (curTour + 1) % tourSteps.length;
+      updateTour();
+    }
+
+    function prevTour(id) {
+      curTour = (curTour - 1 + tourSteps.length) % tourSteps.length;
+      updateTour();
+    }
+  </script>
+</body>
+</html>

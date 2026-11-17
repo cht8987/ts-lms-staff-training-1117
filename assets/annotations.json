@@ -1,0 +1,1009 @@
+[
+  {
+    "id": "t1_s1_list",
+    "raw": "t1_01_enrollments_list.png",
+    "out": "t1_s1_list.png",
+    "boxes": [
+      {
+        "rect": [
+          88,
+          10,
+          97,
+          15
+        ],
+        "num": "1",
+        "color": "gold",
+        "label": "按「New Enrolment」开新单",
+        "pos": "bottom"
+      },
+      {
+        "rect": [
+          20,
+          42,
+          38,
+          49
+        ],
+        "num": "2",
+        "color": "red",
+        "label": "输入单号/姓名搜寻，再按「Filter」",
+        "pos": "bottom"
+      },
+      {
+        "rect": [
+          20,
+          72,
+          96,
+          95
+        ],
+        "num": "3",
+        "color": "gold",
+        "label": "已过滤为测试单（真学生列表需遮罩）",
+        "pos": "top"
+      }
+    ]
+  },
+  {
+    "id": "t1_s2_ai_parse",
+    "raw": "t1_02b_enrollment_ai_parse.png",
+    "out": "t1_s2_ai_parse.png",
+    "boxes": [
+      {
+        "rect": [
+          29,
+          44,
+          36,
+          48
+        ],
+        "num": "1",
+        "color": "gold",
+        "label": "新生点「New student」",
+        "pos": "right"
+      },
+      {
+        "rect": [
+          20,
+          11,
+          96,
+          36
+        ],
+        "num": "2",
+        "color": "red",
+        "label": "贴上家长资料到「Paste from WhatsApp / Google Form」",
+        "pos": "bottom"
+      },
+      {
+        "rect": [
+          20.5,
+          37.5,
+          25.5,
+          42
+        ],
+        "num": "3",
+        "color": "red",
+        "label": "按「Read it」让 AI 拆解并填表（黄色栏位需人工核对）",
+        "pos": "right"
+      }
+    ]
+  },
+  {
+    "id": "t1_s3_package",
+    "raw": "t1_02c_enrollment_step2_package.png",
+    "out": "t1_s3_package.png",
+    "boxes": [
+      {
+        "rect": [
+          20,
+          26,
+          71,
+          56
+        ],
+        "num": "1",
+        "color": "gold",
+        "label": "先确认现有课程名额，避免重复报读",
+        "pos": "top"
+      },
+      {
+        "rect": [
+          20,
+          61,
+          71,
+          76
+        ],
+        "num": "2",
+        "color": "red",
+        "label": "选配套类别并点选下方配套卡",
+        "pos": "top"
+      },
+      {
+        "rect": [
+          73,
+          12,
+          97,
+          74
+        ],
+        "num": "3",
+        "color": "gold",
+        "label": "右侧「To be granted」即时预览期数与金额",
+        "pos": "left"
+      }
+    ]
+  },
+  {
+    "id": "t1_s4_addon",
+    "raw": "t1_02d_enrollment_step3_addon.png",
+    "out": "t1_s4_addon.png",
+    "boxes": [
+      {
+        "rect": [
+          20,
+          32,
+          46,
+          44
+        ],
+        "num": "1",
+        "color": "red",
+        "label": "勾选科目（BM / BI）或「Special case (class swap)」",
+        "pos": "right"
+      },
+      {
+        "rect": [
+          20,
+          50,
+          70,
+          62
+        ],
+        "num": "2",
+        "color": "gold",
+        "label": "填写 Remark 备注（Add-on 教材加购同在此区）",
+        "pos": "top"
+      },
+      {
+        "rect": [
+          66.5,
+          67,
+          71.5,
+          72.5
+        ],
+        "num": "3",
+        "color": "gold",
+        "label": "按「Next」前往 Step 4 收款",
+        "pos": "left"
+      }
+    ]
+  },
+  {
+    "id": "t1_s5_payment",
+    "raw": "t1_02e_enrollment_step4_payment.png",
+    "out": "t1_s5_payment.png",
+    "boxes": [
+      {
+        "rect": [
+          20,
+          17,
+          68,
+          29
+        ],
+        "num": "1",
+        "color": "red",
+        "label": "必须上传「Receipt attachment」（反诈骗硬性规定）",
+        "pos": "bottom"
+      },
+      {
+        "rect": [
+          20,
+          31,
+          61,
+          80
+        ],
+        "num": "2",
+        "color": "gold",
+        "label": "填 Payment method、Amount received、Account holder name",
+        "pos": "right"
+      },
+      {
+        "rect": [
+          66.5,
+          95,
+          71.5,
+          99.5
+        ],
+        "num": "3",
+        "color": "red",
+        "label": "核对无误按「Enroll」（正式系统演示不按送出）",
+        "pos": "left"
+      }
+    ]
+  },
+  {
+    "id": "t1_s6_payments",
+    "raw": "t1_05_enrollment_payments.png",
+    "out": "t1_s6_payments.png",
+    "boxes": [
+      {
+        "rect": [
+          20,
+          18,
+          63,
+          71
+        ],
+        "num": "1",
+        "color": "red",
+        "label": "补登收款：填「Amount (RM)」「Paid at」「Method」后按「Record payment」",
+        "pos": "bottom"
+      },
+      {
+        "rect": [
+          66,
+          18,
+          97,
+          94
+        ],
+        "num": "2",
+        "color": "gold",
+        "label": "右侧核对 Billed / Collected / Outstanding 金额",
+        "pos": "left"
+      }
+    ]
+  },
+  {
+    "id": "t1_s7_invoice",
+    "raw": "t1_06_enrollment_invoice.png",
+    "out": "t1_s7_invoice.png",
+    "boxes": [
+      {
+        "rect": [
+          45,
+          2,
+          78,
+          7
+        ],
+        "num": "1",
+        "color": "gold",
+        "label": "顶部可「Print」「Download PDF」或「Email to parent」",
+        "pos": "bottom"
+      },
+      {
+        "rect": [
+          22,
+          20,
+          77,
+          94
+        ],
+        "num": "2",
+        "color": "red",
+        "label": "正式 Receipt / Invoice（自动带入 Bill-to 与付款明细）",
+        "pos": "top"
+      }
+    ]
+  },
+  {
+    "id": "t2_s1_profile_group",
+    "raw": "t2_01_student_profile_top.png",
+    "out": "t2_s1_profile_group.png",
+    "boxes": [
+      {
+        "rect": [
+          71,
+          17,
+          98,
+          22
+        ],
+        "num": "1",
+        "color": "gold",
+        "label": "顶部操作列：Send reset link / Care record / Sign in as student / Edit",
+        "pos": "bottom"
+      },
+      {
+        "rect": [
+          73,
+          43,
+          98,
+          63
+        ],
+        "num": "2",
+        "color": "red",
+        "label": "「TITLE & GROUP」卡：按「Assign group」编排 Stage 与组别",
+        "pos": "left"
+      }
+    ]
+  },
+  {
+    "id": "t2_s2_classes_actions",
+    "raw": "t2_01b_student_classes_actions.png",
+    "out": "t2_s2_classes_actions.png",
+    "boxes": [
+      {
+        "rect": [
+          20,
+          32,
+          30,
+          37
+        ],
+        "num": "1",
+        "color": "gold",
+        "label": "切到「Classes」分页查看报读班级",
+        "pos": "top"
+      },
+      {
+        "rect": [
+          55,
+          58,
+          69,
+          64
+        ],
+        "num": "2",
+        "color": "red",
+        "label": "「Change time」永久换时间；「Swap one」临时调换单堂",
+        "pos": "right"
+      }
+    ]
+  },
+  {
+    "id": "t2_s3_change_time",
+    "raw": "t2_03_change_time.png",
+    "out": "t2_s3_change_time.png",
+    "boxes": [
+      {
+        "rect": [
+          20,
+          26,
+          63,
+          60
+        ],
+        "num": "1",
+        "color": "gold",
+        "label": "依序选「Current class」→「New class (same subject)」→「Start from」",
+        "pos": "right"
+      },
+      {
+        "rect": [
+          20.5,
+          63.5,
+          26.5,
+          69
+        ],
+        "num": "2",
+        "color": "red",
+        "label": "先按「Preview」试算再确认（订单与金额不变）",
+        "pos": "right"
+      }
+    ]
+  },
+  {
+    "id": "t2_s4_swap_class",
+    "raw": "t2_04_swap_class.png",
+    "out": "t2_s4_swap_class.png",
+    "boxes": [
+      {
+        "rect": [
+          20,
+          27,
+          63,
+          60
+        ],
+        "num": "1",
+        "color": "gold",
+        "label": "选「Their class」、输入第几堂「Which class」、选「Join this class instead」",
+        "pos": "right"
+      },
+      {
+        "rect": [
+          20.5,
+          61,
+          26.5,
+          66.5
+        ],
+        "num": "2",
+        "color": "red",
+        "label": "按「Preview」确认临时调课（学生仍留在原班级）",
+        "pos": "right"
+      }
+    ]
+  },
+  {
+    "id": "t2_s5_transfer",
+    "raw": "t2_05_transfer.png",
+    "out": "t2_s5_transfer.png",
+    "boxes": [
+      {
+        "rect": [
+          20,
+          28,
+          63,
+          52
+        ],
+        "num": "1",
+        "color": "gold",
+        "label": "选择接手人（Sibling / Another existing student / New student）",
+        "pos": "right"
+      },
+      {
+        "rect": [
+          20,
+          54,
+          63,
+          93
+        ],
+        "num": "2",
+        "color": "gold",
+        "label": "选「First term to transfer」与科目",
+        "pos": "right"
+      },
+      {
+        "rect": [
+          20.5,
+          94,
+          26.5,
+          99.5
+        ],
+        "num": "3",
+        "color": "red",
+        "label": "按「Preview」试算后转出未上课期数（原款项留在原单）",
+        "pos": "right"
+      }
+    ]
+  },
+  {
+    "id": "t3_s1_admin_list",
+    "raw": "t3_01_admin_homework_list.png",
+    "out": "t3_s1_admin_list.png",
+    "boxes": [
+      {
+        "rect": [
+          20,
+          36,
+          79,
+          42
+        ],
+        "num": "1",
+        "color": "gold",
+        "label": "筛选期数/阶段/科目，或点「New homework」「Create for this term」",
+        "pos": "bottom"
+      },
+      {
+        "rect": [
+          86,
+          60,
+          94,
+          82
+        ],
+        "num": "2",
+        "color": "red",
+        "label": "点右侧「Submissions」查看学生交件并进入批改",
+        "pos": "left"
+      }
+    ]
+  },
+  {
+    "id": "t3_s2_admin_settings",
+    "raw": "t3_02_admin_homework_edit.png",
+    "out": "t3_s2_admin_settings.png",
+    "boxes": [
+      {
+        "rect": [
+          59,
+          64,
+          87,
+          69
+        ],
+        "num": "1",
+        "color": "red",
+        "label": "「File types」可多选（Photos / PDF / Audio / Word / Any）",
+        "pos": "top"
+      },
+      {
+        "rect": [
+          20,
+          75,
+          92,
+          80
+        ],
+        "num": "2",
+        "color": "red",
+        "label": "勾选「Students can record audio...」后 Audio 自动锁选，学生端出现录音按钮",
+        "pos": "top"
+      },
+      {
+        "rect": [
+          20.5,
+          89.5,
+          25.5,
+          93.5
+        ],
+        "num": "3",
+        "color": "gold",
+        "label": "设定好按「Save」（演示不按送出）",
+        "pos": "right"
+      }
+    ]
+  },
+  {
+    "id": "t3_s3_submissions",
+    "raw": "t3_03_admin_submissions.png",
+    "out": "t3_s3_submissions.png",
+    "boxes": [
+      {
+        "rect": [
+          20,
+          34,
+          74,
+          39
+        ],
+        "num": "1",
+        "color": "gold",
+        "label": "可用搜寻框或状态标签（To mark / Submitted / Completed）筛选",
+        "pos": "bottom"
+      },
+      {
+        "rect": [
+          92,
+          60,
+          97,
+          65
+        ],
+        "num": "2",
+        "color": "red",
+        "label": "按「Mark」进入学生批改页",
+        "pos": "left"
+      }
+    ]
+  },
+  {
+    "id": "t3_s4_marking",
+    "raw": "t3_04_admin_grade.png",
+    "out": "t3_s4_marking.png",
+    "boxes": [
+      {
+        "rect": [
+          21,
+          24,
+          67,
+          63
+        ],
+        "num": "1",
+        "color": "red",
+        "label": "线上画记批改（红笔打勾/圈错/分数直接在图上批注）",
+        "pos": "bottom"
+      },
+      {
+        "rect": [
+          72,
+          46,
+          97,
+          60
+        ],
+        "num": "2",
+        "color": "gold",
+        "label": "右侧显示状态「In marking」，若有其他人锁定可按「Take over」接手",
+        "pos": "left"
+      }
+    ]
+  },
+  {
+    "id": "t3_s5_student_tabs",
+    "raw": "t3_05_student_hw_list_desktop.png",
+    "out": "t3_s5_student_tabs.png",
+    "boxes": [
+      {
+        "rect": [
+          2,
+          18,
+          43,
+          25
+        ],
+        "num": "1",
+        "color": "red",
+        "label": "三大分页：「要交」「批改着」「改好了」一目了然",
+        "pos": "bottom"
+      },
+      {
+        "rect": [
+          2,
+          27,
+          98,
+          70
+        ],
+        "num": "2",
+        "color": "gold",
+        "label": "依课程分组显示剩余份数，点「展开」查看各堂功课",
+        "pos": "bottom"
+      }
+    ]
+  },
+  {
+    "id": "t3_s6_student_speaking",
+    "raw": "t3_06_student_hw_speaking_desktop.png",
+    "out": "t3_s6_student_speaking.png",
+    "boxes": [
+      {
+        "rect": [
+          3.5,
+          49,
+          70,
+          55
+        ],
+        "num": "1",
+        "color": "red",
+        "label": "勾选 Speaking 后显示「录音」按钮，可直接在网页录口说",
+        "pos": "top"
+      },
+      {
+        "rect": [
+          3.5,
+          56,
+          70,
+          73
+        ],
+        "num": "2",
+        "color": "gold",
+        "label": "同时支持上传「照片」「文件 / PDF」与「音频」图示",
+        "pos": "bottom"
+      },
+      {
+        "rect": [
+          3.5,
+          74,
+          70,
+          81
+        ],
+        "num": "3",
+        "color": "red",
+        "label": "确认档案后按「交出去」（正式系统不实际送出）",
+        "pos": "bottom"
+      }
+    ]
+  },
+  {
+    "id": "t3_s7_student_edit_sub",
+    "raw": "t3_07b_student_hw_edit_submitted.png",
+    "out": "t3_s7_student_edit_sub.png",
+    "boxes": [
+      {
+        "rect": [
+          3.5,
+          48,
+          70,
+          54
+        ],
+        "num": "1",
+        "color": "gold",
+        "label": "「已交 · 老师还没开始批」时，学生可自行修改或换档案",
+        "pos": "top"
+      },
+      {
+        "rect": [
+          3.5,
+          81,
+          20,
+          99
+        ],
+        "num": "2",
+        "color": "red",
+        "label": "点右上角「×」删除旧档再重新上传；老师开批或退回重交亦照此流程重交",
+        "pos": "right"
+      }
+    ]
+  },
+  {
+    "id": "t3_s8_student_mobile",
+    "raw": "t3_09_student_hw_speaking_mobile.png",
+    "out": "t3_s8_student_mobile.png",
+    "boxes": [
+      {
+        "rect": [
+          10,
+          45,
+          90,
+          52
+        ],
+        "num": "1",
+        "color": "red",
+        "label": "手机端（390px）一键「录音」",
+        "pos": "top"
+      },
+      {
+        "rect": [
+          10,
+          54,
+          90,
+          74
+        ],
+        "num": "2",
+        "color": "gold",
+        "label": "直接点「照片」「文件 / PDF」「音频」交作业",
+        "pos": "top"
+      }
+    ]
+  },
+  {
+    "id": "t4_s1_cr_pick",
+    "raw": "t4_01_class_records.png",
+    "out": "t4_s1_cr_pick.png",
+    "boxes": [
+      {
+        "rect": [
+          19,
+          44,
+          97,
+          71
+        ],
+        "num": "1",
+        "color": "red",
+        "label": "在「Class Records」依序选「Pick a grade band」→ 期数 → 班级",
+        "pos": "bottom"
+      },
+      {
+        "rect": [
+          20,
+          20,
+          36,
+          25
+        ],
+        "num": "2",
+        "color": "gold",
+        "label": "可切换「All classes」或「Coach classes →」",
+        "pos": "bottom"
+      }
+    ]
+  },
+  {
+    "id": "t4_s2_cr_points",
+    "raw": "t4_01b_class_records_roster.png",
+    "out": "t4_s2_cr_points.png",
+    "boxes": [
+      {
+        "rect": [
+          20,
+          46,
+          50,
+          55
+        ],
+        "num": "1",
+        "color": "gold",
+        "label": "选堂次「CLASS C1–C4」与「Points / Homework / Stars」分页",
+        "pos": "top"
+      },
+      {
+        "rect": [
+          20,
+          60,
+          95,
+          69
+        ],
+        "num": "2",
+        "color": "red",
+        "label": "快选组别并按「+500」「+1,000」等按钮批量加组别分",
+        "pos": "top"
+      },
+      {
+        "rect": [
+          20,
+          75,
+          96,
+          98
+        ],
+        "num": "3",
+        "color": "gold",
+        "label": "下方可针对单组输入分数按「+」即时加分",
+        "pos": "top"
+      }
+    ]
+  },
+  {
+    "id": "t4_s3_care_student",
+    "raw": "t4_02_care_student.png",
+    "out": "t4_s3_care_student.png",
+    "boxes": [
+      {
+        "rect": [
+          20,
+          11,
+          97,
+          39
+        ],
+        "num": "1",
+        "color": "red",
+        "label": "「+ Log a contact」记录联系渠道、内容与下次跟进日，按「Save entry」",
+        "pos": "top"
+      },
+      {
+        "rect": [
+          52,
+          41,
+          97,
+          71
+        ],
+        "num": "2",
+        "color": "gold",
+        "label": "「Learning history」查看出席、功课与 Poll 历史",
+        "pos": "top"
+      },
+      {
+        "rect": [
+          43,
+          73,
+          71,
+          90
+        ],
+        "num": "3",
+        "color": "red",
+        "label": "「Health light」自动信号灯与「Schedule a follow-up」",
+        "pos": "top"
+      }
+    ]
+  },
+  {
+    "id": "t5_s1_staff_edit",
+    "raw": "t5_01_student_edit.png",
+    "out": "t5_s1_staff_edit.png",
+    "boxes": [
+      {
+        "rect": [
+          20,
+          16,
+          40,
+          21
+        ],
+        "num": "1",
+        "color": "red",
+        "label": "修改「Email」（即学生登入 ID，改后务必通知家长）",
+        "pos": "right"
+      },
+      {
+        "rect": [
+          74,
+          63,
+          97,
+          67
+        ],
+        "num": "2",
+        "color": "gold",
+        "label": "改完资料按右侧「Save」储存（或在档案页按「Send reset link」）",
+        "pos": "left"
+      }
+    ]
+  },
+  {
+    "id": "t5_s2_staff_pwd",
+    "raw": "t5_02b_admin_user_email_pwd.png",
+    "out": "t5_s2_staff_pwd.png",
+    "boxes": [
+      {
+        "rect": [
+          40,
+          44,
+          69,
+          54
+        ],
+        "num": "1",
+        "color": "gold",
+        "label": "「Edit User」页可核对「Email」登入帐号",
+        "pos": "right"
+      },
+      {
+        "rect": [
+          40,
+          68,
+          69,
+          78
+        ],
+        "num": "2",
+        "color": "red",
+        "label": "直接输入新「Password」并拉到最底按 Save 即可重设学生密码",
+        "pos": "right"
+      }
+    ]
+  },
+  {
+    "id": "t5_s3_student_pwd",
+    "raw": "t5_03_student_setting_desktop.png",
+    "out": "t5_s3_student_pwd.png",
+    "boxes": [
+      {
+        "rect": [
+          34,
+          18,
+          91,
+          47
+        ],
+        "num": "1",
+        "color": "red",
+        "label": "学生端「设置」→「换密码」：输入新密码两次（至少 6 字）按「换密码」",
+        "pos": "bottom"
+      },
+      {
+        "rect": [
+          34,
+          68,
+          91,
+          98
+        ],
+        "num": "2",
+        "color": "gold",
+        "label": "下方「我的资料」可查看目前登入 Email 或送出修改申请",
+        "pos": "top"
+      }
+    ]
+  },
+  {
+    "id": "t5_s4_forgot_pwd",
+    "raw": "t5_06_forget_password.png",
+    "out": "t5_s4_forgot_pwd.png",
+    "boxes": [
+      {
+        "rect": [
+          35,
+          53,
+          65,
+          62
+        ],
+        "num": "1",
+        "color": "gold",
+        "label": "在登入页按「Forgot password?」进来，输入登入「Email」",
+        "pos": "top"
+      },
+      {
+        "rect": [
+          35,
+          63,
+          65,
+          70
+        ],
+        "num": "2",
+        "color": "red",
+        "label": "按「Send me the email」寄出重设密码信（没 email 可请老师重设）",
+        "pos": "bottom"
+      }
+    ]
+  },
+  {
+    "id": "t6_s1_bana_entry",
+    "raw": "t6_01_student_dashboard_bana.png",
+    "out": "t6_s1_bana_entry.png",
+    "boxes": [
+      {
+        "rect": [
+          2,
+          10,
+          23,
+          24
+        ],
+        "num": "1",
+        "color": "red",
+        "label": "学生首页左上角：点击香蕉图／「Lv 1 Bana」入口（经 /panel/bana/go 进入）",
+        "pos": "right"
+      }
+    ]
+  },
+  {
+    "id": "t6_s2_bana_world",
+    "raw": "t6_03_bana_world.png",
+    "out": "t6_s2_bana_world.png",
+    "boxes": [
+      {
+        "rect": [
+          71,
+          2.5,
+          86,
+          7.5
+        ],
+        "num": "1",
+        "color": "gold",
+        "label": "免密码自动登入，首次进入会自动开帐号",
+        "pos": "bottom"
+      },
+      {
+        "rect": [
+          46,
+          12,
+          88,
+          90
+        ],
+        "num": "2",
+        "color": "red",
+        "label": "输入老师给的「课堂码」按「加入等候室 →」即可开玩",
+        "pos": "left"
+      }
+    ]
+  }
+]

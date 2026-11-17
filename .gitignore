@@ -1,0 +1,5 @@
+scripts/*state.json
+scripts/test_*.py
+scripts/*.pyc
+__pycache__/
+.DS_Store
