@@ -1,1327 +1,1078 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-Hans">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Top Scholar LMS 新系统员工培训简报 | 2026-11-17</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top Scholar LMS 新系统员工培训简报</title>
   <style>
     :root {
-      --bg-dark: #0A0D14;
-      --surface: #131824;
-      --surface-elevated: #1B2232;
+      --bg: #0b0e14;
+      --bg-elev: #131823;
+      --bg-card: #181f2d;
       --gold: #BA8145;
-      --gold-light: #DFAB72;
-      --gold-glow: rgba(186, 129, 69, 0.35);
-      --text: #F1F3F7;
-      --text-muted: #9BA3B5;
+      --gold-light: #d9a366;
+      --gold-dim: rgba(186, 129, 69, 0.16);
+      --red: #ef4444;
+      --text: #f3f5f9;
+      --text-muted: #a6b0c3;
       --border: rgba(186, 129, 69, 0.28);
-      --red: #E05252;
-      --green: #48BB78;
-      --blue: #4299E1;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--bg-dark);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-      overflow: hidden;
-      height: 100vh;
-      width: 100vw;
-      user-select: none;
-    }
-
-    /* Top Progress Bar */
-    #progress-container {
-      position: fixed;
-      top: 0;
-      left: 0;
+    html, body {
       width: 100%;
-      height: 4px;
-      background: rgba(255, 255, 255, 0.08);
-      z-index: 100;
-    }
-    #progress-bar {
       height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--gold), var(--gold-light));
-      transition: width 0.3s ease;
-      box-shadow: 0 0 10px var(--gold);
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Header Nav */
-    header {
+    /* Top HUD */
+    .hud-top {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 54px;
+      top: 0; left: 0; right: 0;
+      height: 58px;
       padding: 0 28px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(10, 13, 20, 0.9);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      z-index: 90;
+      background: rgba(11, 14, 20, 0.9);
+      border-bottom: 1px solid var(--border);
+      z-index: 40;
+      backdrop-filter: blur(8px);
     }
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
       font-weight: 700;
-      font-size: 17px;
-      letter-spacing: 0.5px;
+      font-size: 18px;
+      letter-spacing: 0.3px;
     }
     .brand-badge {
-      background: linear-gradient(135deg, var(--gold), #8A5624);
-      color: #fff;
-      padding: 3px 9px;
-      border-radius: 5px;
-      font-size: 11px;
+      background: var(--gold);
+      color: #0b0e14;
       font-weight: 800;
-      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 14px;
     }
-    .nav-controls {
+    .topic-pills {
       display: flex;
-      align-items: center;
-      gap: 14px;
+      gap: 6px;
+      flex-wrap: wrap;
     }
-    .btn-icon {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 7px 14px;
-      border-radius: 6px;
-      cursor: pointer;
+    .topic-pill {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 6px 12px;
+      border-radius: 999px;
       font-size: 13px;
       font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      cursor: pointer;
       transition: all 0.2s ease;
     }
-    .btn-icon:hover {
+    .topic-pill:hover {
+      border-color: var(--gold);
+      color: var(--text);
+    }
+    .topic-pill.active {
       background: var(--gold);
-      color: #fff;
+      color: #0b0e14;
       border-color: var(--gold);
     }
+    .hud-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hud-btn {
+      background: var(--bg-card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .hud-btn:hover { background: var(--gold); color: #0b0e14; }
     .slide-counter {
       font-variant-numeric: tabular-nums;
-      color: var(--gold-light);
-      font-weight: 700;
       font-size: 15px;
+      font-weight: 700;
+      color: var(--gold-light);
+      min-width: 64px;
+      text-align: right;
     }
 
-    /* Slide Deck */
-    .deck-container {
-      width: 100vw;
-      height: calc(100vh - 54px);
-      margin-top: 54px;
-      position: relative;
+    /* Deck Stage */
+    .deck {
+      position: fixed;
+      top: 58px; left: 0; right: 0; bottom: 52px;
+      overflow: hidden;
     }
     .slide {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      padding: 32px 48px 48px;
+      inset: 0;
+      padding: 28px 40px;
       display: none;
+      flex-direction: column;
+      justify-content: center;
       opacity: 0;
-      transform: translateX(40px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      overflow-y: auto;
+      transition: opacity 0.25s ease;
     }
     .slide.active {
       display: flex;
       opacity: 1;
-      transform: translateX(0);
     }
 
-    /* Standard Two-Column Layout */
-    .slide-grid {
-      display: grid;
-      grid-template-columns: 460px 1fr;
-      gap: 36px;
-      width: 100%;
-      height: 100%;
-      align-items: center;
-    }
-    .slide-grid.single {
-      grid-template-columns: 1fr;
-      max-width: 1100px;
+    /* Cover & Summary layouts */
+    .cover-wrap {
+      max-width: 1280px;
       margin: 0 auto;
-      text-align: center;
+      width: 100%;
     }
-
-    /* Content Area */
-    .content-pane {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 18px;
-    }
-    .topic-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(186, 129, 69, 0.15);
+    .eyebrow {
+      display: inline-block;
+      color: var(--gold-light);
+      background: var(--gold-dim);
       border: 1px solid var(--border);
-      color: var(--gold-light);
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
-      width: fit-content;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .role-tag {
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 700;
-      background: var(--surface-elevated);
-      color: #CBD5E0;
-    }
-    .slide-title {
-      font-size: 30px;
-      font-weight: 800;
-      line-height: 1.25;
-      color: #FFFFFF;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
-    }
-    .slide-subtitle {
+      padding: 6px 14px;
+      border-radius: 999px;
       font-size: 16px;
-      color: var(--gold-light);
-      font-weight: 500;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .cover-title {
+      font-size: clamp(2.4rem, 4.2vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.18;
+      margin-bottom: 14px;
+    }
+    .cover-title span { color: var(--gold-light); }
+    .cover-sub {
+      font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+      color: var(--text-muted);
+      margin-bottom: 30px;
       line-height: 1.5;
     }
-    .bullet-list {
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .topic-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .topic-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--gold-light);
+    }
+    .topic-card .num {
+      color: var(--gold-light);
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      letter-spacing: 0.6px;
+    }
+    .topic-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .topic-card p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Content Slide: 2-column projector layout */
+    .slide-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+    .slide-title-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .topic-tag {
+      background: var(--gold-dim);
+      color: var(--gold-light);
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .slide-title {
+      font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .role-badge {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: var(--text);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .slide-body {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 36% 1fr;
+      gap: 26px;
+      align-items: center;
+    }
+    .notes-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-height: 100%;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .summary-box {
+      background: var(--bg-card);
+      border-left: 4px solid var(--gold);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+      line-height: 1.5;
+      color: var(--text);
+    }
+    .steps-list {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-top: 6px;
     }
-    .bullet-item {
+    .step-item {
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      background: var(--surface);
-      border-left: 3px solid var(--gold);
-      padding: 12px 16px;
-      border-radius: 0 8px 8px 0;
-      font-size: 15px;
-      line-height: 1.5;
-      color: #E2E8F0;
+      background: var(--bg-elev);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 13px 16px;
+      font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+      line-height: 1.48;
     }
-    .bullet-num {
-      background: var(--gold);
-      color: #0A0D14;
-      font-weight: 900;
-      font-size: 12px;
-      width: 20px;
-      height: 20px;
+    .step-num {
+      flex-shrink: 0;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      margin-top: 1px;
+      font-weight: 800;
+      font-size: 16px;
+      color: #fff;
+      background: var(--red);
+      margin-top: 2px;
     }
-    .callout-box {
-      background: rgba(224, 82, 82, 0.1);
-      border: 1px solid rgba(224, 82, 82, 0.3);
-      padding: 10px 14px;
-      border-radius: 6px;
-      font-size: 13px;
-      color: #FEB2B2;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 4px;
+    .step-num.gold { background: var(--gold); color: #0b0e14; }
+    .warn-box {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.45);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: clamp(0.98rem, 1.2vw, 1.12rem);
+      line-height: 1.45;
+      color: #fecaca;
     }
-    .callout-box.tip {
-      background: rgba(186, 129, 69, 0.12);
-      border-color: rgba(186, 129, 69, 0.35);
-      color: var(--gold-light);
+    .tip-box {
+      background: var(--gold-dim);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: clamp(0.98rem, 1.2vw, 1.12rem);
+      line-height: 1.45;
+      color: #f7dfc3;
     }
 
-    /* Media/Screenshot Area */
-    .media-pane {
-      position: relative;
+    .shot-col {
       height: 100%;
-      max-height: calc(100vh - 150px);
+      min-height: 0;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-    }
-    .screenshot-card {
-      position: relative;
-      background: var(--surface);
+      background: var(--bg-elev);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 20px var(--gold-glow);
+      border-radius: 16px;
+      padding: 12px;
+      position: relative;
+    }
+    .shot-col img {
       max-width: 100%;
       max-height: 100%;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      cursor: zoom-in;
-    }
-    .screenshot-card:hover {
-      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.8), 0 0 30px var(--gold-glow);
-    }
-    .screenshot-card img {
-      display: block;
-      width: 100%;
-      height: auto;
-      max-height: calc(100vh - 160px);
       object-fit: contain;
+      border-radius: 10px;
+      cursor: zoom-in;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
     }
-    .mobile-mockup {
-      max-width: 340px !important;
-      border-radius: 32px !important;
-      border: 6px solid #2D3748 !important;
+    .shot-caption {
+      position: absolute;
+      bottom: 10px;
+      right: 14px;
+      background: rgba(11, 14, 20, 0.85);
+      color: var(--text-muted);
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* Floating Navigation Controls */
-    .nav-arrow {
+    /* Bottom controls */
+    .hud-bottom {
       position: fixed;
-      bottom: 28px;
-      z-index: 95;
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      color: var(--text);
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
+      bottom: 0; left: 0; right: 0;
+      height: 52px;
+      padding: 0 28px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-    }
-    .nav-arrow:hover {
-      background: var(--gold);
-      color: #fff;
-      transform: scale(1.08);
-    }
-    .nav-prev { right: 88px; }
-    .nav-next { right: 28px; }
-
-    /* Modal TOC Drawer */
-    #toc-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(5, 7, 12, 0.85);
-      backdrop-filter: blur(8px);
-      z-index: 200;
-      align-items: center;
-      justify-content: center;
-    }
-    #toc-modal.active { display: flex; }
-    .toc-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      width: 90%;
-      max-width: 820px;
-      max-height: 82vh;
-      overflow-y: auto;
-      padding: 28px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
-    }
-    .toc-title {
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--gold-light);
-      margin-bottom: 20px;
-      display: flex;
       justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      padding-bottom: 12px;
+      background: rgba(11, 14, 20, 0.92);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      z-index: 40;
     }
-    .toc-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-      gap: 12px;
+    .progress-track {
+      flex: 1;
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 999px;
+      margin: 0 24px;
+      overflow: hidden;
     }
-    .toc-item {
-      background: var(--surface-elevated);
-      border: 1px solid rgba(255,255,255,0.05);
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      width: 0%;
+      transition: width 0.25s ease;
+    }
+    .nav-btns { display: flex; gap: 10px; }
+    .nav-btn {
+      background: var(--bg-card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 6px 16px;
       border-radius: 8px;
-      padding: 12px 14px;
+      font-size: 15px;
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s;
     }
-    .toc-item:hover {
-      background: rgba(186, 129, 69, 0.15);
-      border-color: var(--gold);
-      transform: translateY(-2px);
-    }
-    .toc-item-num {
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--gold);
-    }
-    .toc-item-text {
-      font-size: 13px;
-      font-weight: 600;
-      margin-top: 4px;
-      color: #E2E8F0;
-    }
+    .nav-btn:hover { background: var(--gold); color: #0b0e14; }
+    .kbd-hint { color: var(--text-muted); font-size: 13px; }
 
-    /* Lightbox */
-    #lightbox {
-      display: none;
+    /* Zoom Lightbox */
+    .lightbox {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.92);
-      z-index: 300;
+      background: rgba(5, 7, 11, 0.95);
+      z-index: 100;
+      display: none;
       align-items: center;
       justify-content: center;
+      padding: 24px;
       cursor: zoom-out;
     }
-    #lightbox.active { display: flex; }
-    #lightbox img {
-      max-width: 95vw;
-      max-height: 95vh;
-      border-radius: 8px;
-      box-shadow: 0 0 40px rgba(0,0,0,0.9);
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 96vw;
+      max-height: 94vh;
+      object-fit: contain;
+      border-radius: 10px;
+      border: 2px solid var(--gold);
+    }
+
+    @media (max-width: 960px) {
+      .topic-pills { display: none; }
+      .slide { padding: 16px; overflow-y: auto; justify-content: flex-start; }
+      .slide-body { grid-template-columns: 1fr; }
+      .topic-grid { grid-template-columns: 1fr; }
+      .shot-col { min-height: 260px; }
     }
   </style>
 </head>
 <body>
-
-  <!-- Progress Bar -->
-  <div id="progress-container"><div id="progress-bar"></div></div>
-
-  <!-- Header -->
-  <header>
+  <header class="hud-top">
     <div class="brand">
       <span class="brand-badge">TOP SCHOLAR</span>
-      <span>LMS 新系统员工实操培训</span>
+      <span>新 LMS 系统员工培训简报</span>
     </div>
-    <div class="nav-controls">
-      <span class="slide-counter" id="counter">01 / 25</span>
-      <button class="btn-icon" onclick="toggleToc()">☰ 目录 (M)</button>
-      <button class="btn-icon" onclick="toggleFullScreen()">⛶ 全屏 (F)</button>
-      <a href="guide.html" class="btn-icon" style="text-decoration:none;">📖 完整教程</a>
+    <nav class="topic-pills" id="topicPills"></nav>
+    <div class="hud-actions">
+      <a href="index.html" class="hud-btn">返回目录</a>
+      <a href="guide.html" class="hud-btn">图文教程</a>
+      <button class="hud-btn" id="btnFullscreen" title="全屏 (F)">⛶ 全屏</button>
+      <div class="slide-counter" id="slideCounter">1 / 21</div>
     </div>
   </header>
 
-  <!-- Slide Deck -->
-  <div class="deck-container">
-
-    <!-- Slide 01: 封面 -->
-    <section class="slide active">
-      <div class="slide-grid single">
-        <div class="content-pane" style="align-items:center;">
-          <div class="topic-pill">TOP SCHOLAR EDUCATION · 2026-11-17</div>
-          <h1 class="slide-title" style="font-size: 46px; margin: 12px 0;">Top Scholar LMS 新系统员工实战培训</h1>
-          <p class="slide-subtitle" style="font-size: 20px; max-width: 760px;">
-            一屏录单 · 灵活调课 · 功课作业批改 · 课堂加分 · 帐号安全 · Bana 免密直通
-          </p>
-          <div style="margin-top: 32px; display: flex; gap: 24px; justify-content: center;">
-            <div style="background: var(--surface); border: 1px solid var(--border); padding: 14px 28px; border-radius: 10px;">
-              <div style="font-size: 12px; color: var(--text-muted);">主讲人</div>
-              <div style="font-size: 18px; font-weight: 700; color: var(--gold-light); margin-top: 4px;">Elson</div>
-            </div>
-            <div style="background: var(--surface); border: 1px solid var(--border); padding: 14px 28px; border-radius: 10px;">
-              <div style="font-size: 12px; color: var(--text-muted);">适用对象</div>
-              <div style="font-size: 18px; font-weight: 700; color: #FFF; margin-top: 4px;">Sales 销售 / 老师 / Care 关怀 / 客服</div>
-            </div>
-            <div style="background: var(--surface); border: 1px solid var(--border); padding: 14px 28px; border-radius: 10px;">
-              <div style="font-size: 12px; color: var(--text-muted);">系统网址</div>
-              <div style="font-size: 18px; font-weight: 700; color: var(--gold-light); margin-top: 4px;">lms.topscholar.edu.my</div>
-            </div>
+  <main class="deck" id="deck">
+    <!-- Slide 1: Cover -->
+    <section class="slide active" data-topic="0">
+      <div class="cover-wrap">
+        <span class="eyebrow">2026-11-17 17:00 员工培训 · lms.topscholar.edu.my</span>
+        <h1 class="cover-title">Top Scholar <span>新 LMS 系统</span> 操作简报</h1>
+        <p class="cover-sub">主讲：Elson ｜ 涵盖 Sales 录单、学生换班与转课、功课批改与提交、Students Behaviour、帐号密码与 Bana Games 六大核心流程。</p>
+        <div class="topic-grid">
+          <div class="topic-card" onclick="goToTopic(1)">
+            <div class="num">TOPIC 01 · SALES / ADMIN</div>
+            <h3>Enrolment 录单与收款</h3>
+            <p>AI 拆解家长资料、选配套与 Add-on、收据上传、补收款与 Invoice。</p>
           </div>
-          <div style="margin-top: 32px; color: var(--text-muted); font-size: 14px;">
-            按键盘 <kbd style="background: var(--surface-elevated); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border);">Space</kbd> 或 <kbd style="background: var(--surface-elevated); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border);">→</kbd> 开始浏览
+          <div class="topic-card" onclick="goToTopic(2)">
+            <div class="num">TOPIC 02 · SALES / CARE</div>
+            <h3>学生页面怎样换</h3>
+            <p>Title &amp; Group 编组、永久 Change time、临时 Swap one class、Transfer 转课。</p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 02: 大纲 -->
-    <section class="slide">
-      <div class="slide-grid single">
-        <div class="content-pane" style="align-items:center;">
-          <div class="topic-pill">AGENDA · 培训六大主题</div>
-          <h2 class="slide-title">今天培训的核心内容</h2>
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; margin-top: 24px; text-align: left;">
-            <div class="bullet-item" style="border-left-color: var(--gold);">
-              <div class="bullet-num">1</div>
-              <div>
-                <strong style="color:var(--gold-light);">Enrolment 销售录单</strong>
-                <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">AI 拆解家长信息、配套与加购、付款登记、发票开立</p>
-              </div>
-            </div>
-            <div class="bullet-item" style="border-left-color: var(--blue);">
-              <div class="bullet-num" style="background:var(--blue); color:#fff;">2</div>
-              <div>
-                <strong style="color:#90CDF4;">学生页面怎样换</strong>
-                <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">Title & Group 称号组别卡、Change Time、Swap Class 临时换课、Transfer</p>
-              </div>
-            </div>
-            <div class="bullet-item" style="border-left-color: var(--green);">
-              <div class="bullet-num" style="background:var(--green); color:#fff;">3</div>
-              <div>
-                <strong style="color:#9AE6B4;">功课与作业批改</strong>
-                <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">老师端批改与退回、Speaking 录音支持、学生端三态（要交/批改中/改好了）</p>
-              </div>
-            </div>
-            <div class="bullet-item" style="border-left-color: #ED8936;">
-              <div class="bullet-num" style="background:#ED8936; color:#fff;">4</div>
-              <div>
-                <strong style="color:#FBD38D;">Students Behaviour</strong>
-                <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">Class Records 课堂表现打分、组别加分与出缺席、Care 关怀名单</p>
-              </div>
-            </div>
-            <div class="bullet-item" style="border-left-color: #9F7AEA;">
-              <div class="bullet-num" style="background:#9F7AEA; color:#fff;">5</div>
-              <div>
-                <strong style="color:#D6BCFA;">学生 Email 与密码</strong>
-                <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">学生登入 ID 即 Email；员工后台改密 vs 学生端自行修改与找回</p>
-              </div>
-            </div>
-            <div class="bullet-item" style="border-left-color: #38B2AC;">
-              <div class="bullet-num" style="background:#38B2AC; color:#fff;">6</div>
-              <div>
-                <strong style="color:#81E6D9;">Bana Games 免密进入</strong>
-                <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">学生端首页卡片直通、单点登录自动开号、无需输入帐密</p>
-              </div>
-            </div>
+          <div class="topic-card" onclick="goToTopic(3)">
+            <div class="num">TOPIC 03 · 老师 / 学生</div>
+            <h3>功课与批改流程</h3>
+            <p>File types 多选与 Speaking 录音、批改/退回重交、学生修改与提交。</p>
+          </div>
+          <div class="topic-card" onclick="goToTopic(4)">
+            <div class="num">TOPIC 04 · CARE / 教练</div>
+            <h3>Students Behaviour</h3>
+            <p>Class Records 三层选班、课堂组别加分、学生个人 Care 与 Health light。</p>
+          </div>
+          <div class="topic-card" onclick="goToTopic(5)">
+            <div class="num">TOPIC 05 · STAFF / 学生</div>
+            <h3>学生 Email 与密码</h3>
+            <p>员工改登入 ID 与重设密码、学生自改密码、「Forgot password?」自助重设。</p>
+          </div>
+          <div class="topic-card" onclick="goToTopic(6)">
+            <div class="num">TOPIC 06 · 学生端</div>
+            <h3>Bana Games 进入方式</h3>
+            <p>首页香蕉入口免密码进游戏（/panel/bana/go），首次进入自动开帐号。</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Slide 03: Topic 1 - 列表 -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 1 · ENROLMENT 录单 <span class="role-tag">Sales / Admin</span></div>
-          <h2 class="slide-title">1.1 销售录单列表总览</h2>
-          <p class="slide-subtitle">管理所有学生报名单据、收款进度与业绩归属</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>新增录单入口：</strong>点击右上角「New Enrolment」，进入一屏录单流程。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>单据筛选与状态：</strong>可按期数（Term）、付款状态（Paid / Pending）、学生姓名随时筛选。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>快速动作：</strong>列表右侧可一键查看 Detail 详情、开立 Invoice、登记收款。</div>
-            </div>
-          </div>
-          <div class="callout-box tip">
-            💡 路径：登入后点击左侧选单「CRM Sales」→「Enrolments」
+    <!-- TOPIC 1: ENROLMENT (4 slides) -->
+    <section class="slide" data-topic="1">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 1 · Enrolment</span>
+          <h2 class="slide-title">1.1 Enrolments 列表与开启新单</h2>
+        </div>
+        <span class="role-badge">适用：Sales / Admin</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">所有报读单集中在后台 <strong>Sales → Sales Report</strong>（<code>/admin/ts-crm/enrollments</code>），可先搜寻再开单。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num gold">1</span><div>点右上角金色「New Enrolment」或左侧「New Enrolment」进入四步录单页。</div></div>
+            <div class="step-item"><span class="step-num">2</span><div>顶部「Search」输入单号或学生名字后按「Filter」，先确认是否已有订单避免重复。</div></div>
+            <div class="step-item"><span class="step-num gold">3</span><div>本培训画面已过滤为测试单（真实名单截图务必遮罩学生个资与金额）。</div></div>
           </div>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_01_enrolment_list.png" alt="Enrolment List">
-          </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t1_s1_list.png" alt="Enrolments 列表" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 04: Topic 1 - AI 拆解 -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 1 · ENROLMENT 录单 <span class="role-tag">Sales 必备神技</span></div>
-          <h2 class="slide-title">1.2 贴上资料 · AI 自动拆解</h2>
-          <p class="slide-subtitle">再也不用手打 10 个栏位！复制家长 WhatsApp 消息直接贴上</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>贴上原始文本：</strong>将家长填写的报名表整段复制到左侧「Paste & Parse」文本框。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>点击「Parse」AI 识别：</strong>系统自动解析家长姓名、联络电话、学生姓名、年级、欲报科目。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>智能匹配老生/新生：</strong>输入电话自动带出已有家长资料，杜绝重复建档。</div>
-            </div>
-          </div>
-          <div class="callout-box">
-            ⚠️ 务必确认解析出的「学生姓名」与「联络电话」准确无误再进行下一步。
-          </div>
+    <section class="slide" data-topic="1">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 1 · Enrolment</span>
+          <h2 class="slide-title">1.2 贴上家长资料，让 AI 自动拆解（Step 1）</h2>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_02_enrolment_ai_parse.png" alt="AI Parse">
+        <span class="role-badge">适用：Sales</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">新生报名不必逐格打字，直接把家长 WhatsApp 或 Google Form 资料贴给 AI 解析。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num gold">1</span><div>在 Step 1 点「New student」（旧生则在「Existing student」搜名字/学号）。</div></div>
+            <div class="step-item"><span class="step-num">2</span><div>点上方「Paste from WhatsApp / Google Form」展开文字框并贴上家长讯息。</div></div>
+            <div class="step-item"><span class="step-num">3</span><div>按「Read it」，AI 会拆解并把栏位标黄填入，检查无误后按「Next」。</div></div>
           </div>
+          <div class="warn-box">AI 标黄栏位仍需人工核对（尤其 Email＝学生登入 ID）；收据仍须在 Step 4 上传。</div>
+        </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t1_s2_ai_parse.png" alt="AI 拆解资料" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 05: Topic 1 - 选配套与加购 -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 1 · ENROLMENT 录单 <span class="role-tag">Sales</span></div>
-          <h2 class="slide-title">1.3 选学期配套与加购科目</h2>
-          <p class="slide-subtitle">灵活选课、自动计算多科优惠与学额校验</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>选择主配套（Package）：</strong>选择学期（如 2026-11 预习班或正课配套），系统自动载入标准科目。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>选定时段与班级：</strong>点击下拉选单分配上课时间（如 BM 周一、BI 周四）。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>加购科目（Add-ons）：</strong>如有额外加选科目或教材，在 Add-on 区块勾选，金额自动汇总。</div>
-            </div>
-          </div>
+    <section class="slide" data-topic="1">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 1 · Enrolment</span>
+          <h2 class="slide-title">1.3 选配套、选科目 / Add-on 与收款（Step 2–4）</h2>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_03_enrolment_packages.png" alt="Packages & Addons">
+        <span class="role-badge">适用：Sales</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">选定配套后会先在 Step 3 选科目与加购 Add-on，最后在 Step 4 上传收据与收款。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num">1</span><div>Step 4 必须上传银行转帐凭证「Receipt attachment」（未上传不可送出）。</div></div>
+            <div class="step-item"><span class="step-num gold">2</span><div>填写「Payment method」「Amount received (RM)」「Account holder name」「Sales date」。</div></div>
+            <div class="step-item"><span class="step-num">3</span><div>核对右侧「To be granted」期数与总额无误后按「Enroll」存档（演示不实际送出）。</div></div>
           </div>
+          <div class="tip-box">Step 2 选配套（国英特训 / Special / Custom package）→ Step 3 勾选 BM/BI 与教材 Add-on → Step 4 收款。</div>
+        </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t1_s5_payment.png" alt="Step 4 收款与上传收据" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 06: Topic 1 - 收款与存档 -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 1 · ENROLMENT 录单 <span class="role-tag">Sales / Finance</span></div>
-          <h2 class="slide-title">1.4 付款登记与送出前确认</h2>
-          <p class="slide-subtitle">记录收款凭证，核对应收金额</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>登记付款方式：</strong>选择 Bank Transfer / FPX / Cash，并填入银行转账参考号（Ref No）。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>上传汇款收据：</strong>支持上传家长汇款单截图或 PDF 凭证。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>核对并按「Save」：</strong>系统实时检查名额并锁单，自动发放学生课程权限。</div>
-            </div>
-          </div>
-          <div class="callout-box">
-            ⚠️ 员工在正式机录单请务必认真核对，按「Save」后单据即生效并生成正式学籍。
-          </div>
+    <section class="slide" data-topic="1">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 1 · Enrolment</span>
+          <h2 class="slide-title">1.4 存档后的订单详情、补收款与 Invoice</h2>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_04_enrolment_payment.png" alt="Payment & Save">
+        <span class="role-badge">适用：Sales / Finance</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">存档后的订单可查看分期收款记录（<code>/payments</code>）并一键产生或寄送正式收据（<code>/invoice</code>）。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num gold">1</span><div>在 <code>/invoice</code> 页顶部可直接「Print」「Download PDF」或「Email to parent」。</div></div>
+            <div class="step-item"><span class="step-num">2</span><div>收据自动带入「PAYMENT FROM」「STUDENT」、期数区间与付款余额。</div></div>
           </div>
+          <div class="tip-box">若后续有分期或补款，到订单的「Payments」页填写「Amount (RM)」「Paid at」「Method」后按「Record payment」。</div>
+        </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t1_s7_invoice.png" alt="订单 Invoice 收据页" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 07: Topic 1 - 发票与单据详情 -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 1 · ENROLMENT 录单 <span class="role-tag">Sales / Customer Service</span></div>
-          <h2 class="slide-title">1.5 单据详情与 WhatsApp 发票</h2>
-          <p class="slide-subtitle">存档后单据一目了然，一键发送发票给家长</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>三大页签：</strong>单据详情（Detail）、付款记录（Payments）、发票（Invoice）。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>WhatsApp 发送发票：</strong>点击「Send Invoice via WhatsApp」，系统直接呼叫官方通道将官方 PDF 发票送达家长手机。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>改单申请：</strong>若单据需要变更期数，可在此提交改单申请待 Admin 批准。</div>
-            </div>
+    <!-- TOPIC 2: STUDENT CHANGES (3 slides) -->
+    <section class="slide" data-topic="2">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 2 · 学生页面怎样换</span>
+          <h2 class="slide-title">2.1 学生档案页与 Title &amp; Group 卡</h2>
+        </div>
+        <span class="role-badge">适用：Sales / Care / Operation</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">学生档案页（<code>/admin/ts-crm/students/{id}</code>）集中了帐号操作、课程管理与小组称号设置。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num gold">1</span><div>顶部按钮列：「Send reset link」寄密码重设信、「Care record」进关怀页、「Sign in as student」切换学生视角、「Edit」改资料。</div></div>
+            <div class="step-item"><span class="step-num">2</span><div>右上角「TITLE &amp; GROUP」卡：按「Assign group」设定 Stage 与组别号，决定学生在课堂与 Moodle 的组别称号。</div></div>
           </div>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_05_enrolment_invoice.png" alt="Invoice">
-          </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t2_s1_profile_group.png" alt="学生档案与 Title & Group" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 08: Topic 2 - 学生档案与称号 -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 2 · 学生页面怎样换 <span class="role-tag">Care / Sales / Teacher</span></div>
-          <h2 class="slide-title">2.1 学生档案主页与 Title & Group</h2>
-          <p class="slide-subtitle">学籍中心：掌握学生称号、班级组别与 Zoom 进场显示名</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>学籍总览卡：</strong>展示学号（如 TS-011960）、年级、在读状态与联络方式。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>Title & Group 称号卡：</strong>显示学生专属称号（如「状元」、「巡查员」）及班级组别。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>Zoom 进场名同源：</strong>老师在 Zoom 课室看到的进场名称完全以此卡称号为准！</div>
-            </div>
-          </div>
+    <section class="slide" data-topic="2">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 2 · 学生页面怎样换</span>
+          <h2 class="slide-title">2.2 换上课时间：Change time vs Swap one class</h2>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_06_student_profile.png" alt="Student Profile">
+        <span class="role-badge">适用：Sales / Care</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">在学生档案下方「Classes」分页可对单门课操作换班；两者的差异在于<strong>永久换班</strong> vs <strong>只换一堂</strong>。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num gold">1</span><div><strong>Change time</strong>（永久换班）：选「Current class」→「New class (same subject)」→「Start from」生效期数 → 按「Preview」试算后确认。</div></div>
+            <div class="step-item"><span class="step-num">2</span><div><strong>Swap one class</strong>（临时换一堂）：输入第几堂「Which class」与旁听班「Join this class instead」→ 按「Preview」确认，学生仍留在原班。</div></div>
           </div>
+          <div class="tip-box">两者都不会改动原订单与收费金额；操作前请先按「Preview」核对。</div>
+        </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t2_s3_change_time.png" alt="Change time 换时间" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 09: Topic 2 - 换课按钮功能集 -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 2 · 学生页面怎样换 <span class="role-tag">操作指南</span></div>
-          <h2 class="slide-title">2.2 换班动作：三大核心按钮</h2>
-          <p class="slide-subtitle">在学生档案页的「Classes」区块，依不同需求选择动作</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>「Change Time」永久换时段：</strong>学生长期时间冲突，调整后续所有上课时段。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>「Swap Class」单堂临时调课：</strong>本周某一天请假，仅临时调换其中一堂课去其他班补课。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>「Transfer」转课程：</strong>跨年段或跨科目转移（如从 Y1-Y3 转至 Y4-Y6）。</div>
-            </div>
-          </div>
-          <div class="callout-box tip">
-            💡 区分清楚「永久改时段」与「临时换一堂」，避免影响排课考勤！
+    <section class="slide" data-topic="2">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 2 · 学生页面怎样换</span>
+          <h2 class="slide-title">2.3 转课给其他学生：Transfer</h2>
+        </div>
+        <span class="role-badge">适用：Sales / Admin</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">当学生要把尚未上课的剩余期数转给兄弟姐妹或另一位学生时，使用「Transfer」（<code>/students/{id}/transfer</code>）。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num gold">1</span><div>选择接手对象：「Sibling」「Another existing student」或「New student」。</div></div>
+            <div class="step-item"><span class="step-num gold">2</span><div>选择「First term to transfer」起始期数与要转出的科目（全不勾＝全科）。</div></div>
+            <div class="step-item"><span class="step-num">3</span><div>按「Preview」试算后再确认送出（原订单与款项留在原学生名下）。</div></div>
           </div>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_07_student_classes_actions.png" alt="Class Actions">
-          </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t2_s5_transfer.png" alt="Transfer 转课" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 10: Topic 2 - Change Time -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 2 · 学生页面怎样换 <span class="role-tag">Change Time</span></div>
-          <h2 class="slide-title">2.3 Change Time 换时间操作流程</h2>
-          <p class="slide-subtitle">永久变更学生上课班级与时间</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>选择新班级时段：</strong>系统自动列出同一课程的所有可用班级及剩余学额。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>冲突检测：</strong>系统自动校验新时间是否与该学生其他科目产生时间冲突。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>按「Confirm Change」：</strong>权限与课表立即转移，学生端与老师花名册同步更新。</div>
-            </div>
+    <!-- TOPIC 3: HOMEWORK (4 slides) -->
+    <section class="slide" data-topic="3">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 3 · 功课</span>
+          <h2 class="slide-title">3.1 老师端：功课设定（File types 多选 ＋ Speaking 录音）</h2>
+        </div>
+        <span class="role-badge">适用：老师 / 助教</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">老师从左侧「Homework」进入功课列表与设定页，可精确限制学生可交的档案格式与口说录音功能。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num">1</span><div>「File types」可<strong>多选</strong>（Photos / PDF / Audio / Word / Any），按需求勾选组合。</div></div>
+            <div class="step-item"><span class="step-num">2</span><div>勾选「Students can record audio on this page (speaking homework)」后，上方的「Audio」会自动锁死勾选，学生端即显示录音与 Audio 图示。</div></div>
+            <div class="step-item"><span class="step-num gold">3</span><div>设定日期与「Task Guide」后按「Save」（演示不实际送出）。</div></div>
           </div>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_08_change_time.png" alt="Change Time">
-          </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t3_s2_admin_settings.png" alt="功课设定 File types 与 Speaking" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 11: Topic 2 - Swap Class 临时调课 -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 2 · 学生页面怎样换 <span class="role-tag">Swap Class</span></div>
-          <h2 class="slide-title">2.4 Swap Class 单堂临时调课</h2>
-          <p class="slide-subtitle">临时补课专用：精确调换指定课次，不影响整期学籍</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>指定调换课次：</strong>选择因病假、事假无法出席的具体某一天课程。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>选择目标补课班级：</strong>选定平行班级的对应课次。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>临时通行证生效：</strong>调换课次自动生成单次 Zoom 进场授权，原有主班级排课保持不变。</div>
-            </div>
-          </div>
+    <section class="slide" data-topic="3">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 3 · 功课</span>
+          <h2 class="slide-title">3.2 老师端：批改、画记与退回重交</h2>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_09_swap_class.png" alt="Swap Class">
+        <span class="role-badge">适用：老师 / Marker</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">在功课列表按「Submissions」→「Mark」进入批改页，直接在学生作业上画记、打分与写评语。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num">1</span><div>按「Edit」开启画笔工具（打勾、圈错、写分数），批改副本不影响学生原档。</div></div>
+            <div class="step-item"><span class="step-num gold">2</span><div>右侧显示家长偏好语言与状态「In marking」（若他人锁定可按「Take over」接手）。</div></div>
           </div>
+          <div class="tip-box">右下角提供「Save」暂存、「Release」发布给学生，以及「Reject / Return to student」退回重交（因正式系统不按送出，示范到送出前一步）。</div>
+        </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t3_s4_marking.png" alt="老师端画记批改" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 12: Topic 3 - 老师端功课列表 -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 3 · 功课作业系统 <span class="role-tag">Teacher / Admin</span></div>
-          <h2 class="slide-title">3.1 老师端功课管理列表</h2>
-          <p class="slide-subtitle">全面取代旧版 Moodle 作业：一站式布置与追缴</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>作业总览：</strong>查看所有课程作业布置情况、提交人数、待批改数量。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>批量筛选：</strong>支持按科目（BM / BI / BC / Math）、年段、学期秒级筛选。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>快捷入口：</strong>一键进入「Marking」批改台或「Assignation」指派作业批改人。</div>
-            </div>
-          </div>
+    <section class="slide" data-topic="3">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 3 · 功课</span>
+          <h2 class="slide-title">3.3 学生端：功课三大状态「要交 / 批改着 / 改好了」</h2>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_10_homework_admin_list.png" alt="Homework List">
+        <span class="role-badge">适用：学生（含手机端）</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">学生进入「功课」（<code>/panel/ts-homework</code>）后，上方三大分页清楚区分目前进度（以测试学生 <code>[TEST] GOH MEI MEI</code> 示范）。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num">1</span><div>「要交」与「改好了」依课程汇总卡呈现，点击「展开 ▼」即可看每堂功课。</div></div>
+            <div class="step-item"><span class="step-num gold">2</span><div>「批改着」分「等批改」（老师未开批，可修改）与「批改中」（锁定中）。</div></div>
           </div>
+          <div class="tip-box">注：测验（Quizzes）亦整合在此页状态栏，测验汇入格式另有独立教程，本次不展开。</div>
+        </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t3_s5_student_tabs.png" alt="学生功课三栏状态" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 13: Topic 3 - 功课设定与 Speaking -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 3 · 功课作业系统 <span class="role-tag">重点规则</span></div>
-          <h2 class="slide-title">3.2 功课设定：格式多选与 Speaking 录音</h2>
-          <p class="slide-subtitle">支持多种提交方式，语言科目听说训练利器</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>File types 可以多选：</strong>可同时勾选 Photo（拍照图片）和 Document（PDF 文档）。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>勾选「Speaking」口说录音：</strong>勾选后，学生端会自动亮起「Audio 麦克风」录音按钮。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>截止时间设定：</strong>到达截止时间后系统自动进入逾期提醒，学生仍可补交（带逾期标记）。</div>
-            </div>
-          </div>
-          <div class="callout-box tip">
-            💡 已知规则：语言科老师请务必确认有勾选「Speaking」以启用学生端录音功能！
+    <section class="slide" data-topic="3">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 3 · 功课</span>
+          <h2 class="slide-title">3.4 学生端：上传照片/PDF、录音交与修改提交</h2>
+        </div>
+        <span class="role-badge">适用：学生（桌面 / 手机）</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">打开功课详情页，学生可依老师设定直接录音或上传「照片」「文件 / PDF」「音频」。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num">1</span><div>Speaking 功课上方会出现「录音」横条，点开即可直接在网页录制口说。</div></div>
+            <div class="step-item"><span class="step-num gold">2</span><div>虚线框内点「照片」「文件 / PDF」或「音频」选档，按「交出去」送出。</div></div>
+            <div class="step-item"><span class="step-num">3</span><div><strong>修改提交（EDIT/CHANGE）</strong>：若显示「已交 · 老师还没开始批」或被「退回重交」，点旧档右上角「×」删除后即可重新上传再「交出去」。</div></div>
           </div>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_11_homework_options.png" alt="Homework Options">
-          </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t3_s6_student_speaking.png" alt="学生端录音与上传交功课" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 14: Topic 3 - 批改与退回 -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 3 · 功课作业系统 <span class="role-tag">Teacher 批改台</span></div>
-          <h2 class="slide-title">3.3 批改、退回重交与修改提交</h2>
-          <p class="slide-subtitle">在线画记批改、录音试听与订正闭环</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>试听录音与看图：</strong>右侧直接试听学生录音或点开原图逐页批阅。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>「Return for redo」退回重交：</strong>若学生写错或交白卷，按退回并留下原因，学生端立即收到重交通知。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>「Release」发成绩：</strong>确认给分与评语后按发成绩，自动写入学生积分成长等级。</div>
-            </div>
+    <!-- TOPIC 4: STUDENTS BEHAVIOUR (3 slides) -->
+    <section class="slide" data-topic="4">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 4 · Students Behaviour</span>
+          <h2 class="slide-title">4.1 Class Records：三层选班进入课堂</h2>
+        </div>
+        <span class="role-badge">适用：Care / 教练 / 助教</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">从左侧进入「Class Records」（<code>/admin/ts-care/class-records</code>），采用「一次选一层」防误点设计。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num">1</span><div>先点「1 · Pick a grade band」（如 Y1-Y3 / Y4-Y6 / F1-F3 / F4-F5）→ 再选 Term 期数 → 再选班级。</div></div>
+            <div class="step-item"><span class="step-num gold">2</span><div>上方可切换「All classes」或「Coach classes →」快速看自己负责的班。</div></div>
           </div>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_12_homework_grading.png" alt="Homework Grading">
-          </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t4_s1_cr_pick.png" alt="Class Records 选班" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 15: Topic 3 - 学生端三态管理 -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 3 · 功课作业系统 <span class="role-tag">学生端体验</span></div>
-          <h2 class="slide-title">3.4 学生端功课三态标签</h2>
-          <p class="slide-subtitle">简单明了：学生打开就能清楚知道自己还要交什么</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>「要交」Tab：</strong>当前待完成的作业列表，清楚标示截止时间与科目标签。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>「批改中」Tab：</strong>已提交给老师，正在等待批改的作业（批改前学生仍可「修改提交」）。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>「改好了」Tab：</strong>老师已批改完成，学生点开即可看红笔画记、评分与老师语音评语。</div>
-            </div>
+    <section class="slide" data-topic="4">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 4 · Students Behaviour</span>
+          <h2 class="slide-title">4.2 课堂表现与 Group Points 组别加分</h2>
+        </div>
+        <span class="role-badge">适用：教练 / 助教</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">进入班级后，可在「Group points」面板按堂次为全组、单双数或指定组别即时加分。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num gold">1</span><div>选定「CLASS C1–C4」堂次与课程类型（Live class / Replay / Homework class / Night class）。</div></div>
+            <div class="step-item"><span class="step-num">2</span><div>点「All groups / Odd groups / Even groups」或勾选多组后按「+500」「+1,000」批量加分。</div></div>
+            <div class="step-item"><span class="step-num gold">3</span><div>也可在单组列输入分数并按右侧「+」即时记分（下方学生明细已遮罩处理）。</div></div>
           </div>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_13_student_hw_desktop.png" alt="Student Homework Desktop">
-          </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t4_s2_cr_points.png" alt="Class Records 组别加分" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 16: Topic 3 - 手机端交功课 -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 3 · 功课作业系统 <span class="role-tag">Mobile 体验</span></div>
-          <h2 class="slide-title">3.5 手机端拍照与 Speaking 录音提交</h2>
-          <p class="slide-subtitle">90% 的学生用手机交作业：直觉、免转档、随拍随交</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>手机直接拍照：</strong>点「Upload」直接开启相机拍摄习字簿或练习册。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>按住录音 Speaking：</strong>点按麦克风即可朗读书本课文录音，录完可重听满意再交。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>交作业奖励：</strong>学生每次成功提交作业，自动获得成长积分 +20 积分！</div>
-            </div>
+    <section class="slide" data-topic="4">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 4 · Students Behaviour</span>
+          <h2 class="slide-title">4.3 学生个人 Care 关怀页与 Health light</h2>
+        </div>
+        <span class="role-badge">适用：Care / 教练</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">在学生档案按「Care record」或从名单点入学生关怀页（<code>/admin/ts-care/student/{id}</code>），完整掌握出席与追踪记录。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num">1</span><div>顶部「+ Log a contact」记录联络类型、学生近况、家长回馈与下次跟进日，按「Save entry」存档。</div></div>
+            <div class="step-item"><span class="step-num gold">2</span><div>右侧「Learning history」展开各期每堂的 Zoom 时长、功课状态与 Poll 互动。</div></div>
+            <div class="step-item"><span class="step-num">3</span><div>下方「Health light」显示红/黄/绿学习警示灯，并可「Schedule a follow-up」排程跟进。</div></div>
           </div>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card mobile-mockup" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_14_student_hw_mobile.png" alt="Student Mobile HW">
-          </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t4_s3_care_student.png" alt="学生 Care 关怀页" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 17: Topic 4 - Class Records 课堂记录 -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 4 · STUDENTS BEHAVIOUR <span class="role-tag">Teacher / Care</span></div>
-          <h2 class="slide-title">4.1 Class Records 课堂表现打分</h2>
-          <p class="slide-subtitle">实时点名、课堂积极度打分与学生状态跟踪</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>年段与学期选择：</strong>点击对应年级卡片（如 Y1-Y3）与当期学期。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>班级格子一览：</strong>点击具体的课程（如周一 BM 班）即可开启全班点名册。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>自动同步考勤：</strong>课室出缺席、迟到状态一键勾选，数据自动流转给 Care 关怀团队。</div>
-            </div>
-          </div>
+    <!-- TOPIC 5: EMAIL & PASSWORD (3 slides) -->
+    <section class="slide" data-topic="5">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 5 · 学生 Email 与密码</span>
+          <h2 class="slide-title">5.1 员工帮学生改 Email（登入 ID）与寄重设连结</h2>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_15_class_records_list.png" alt="Class Records List">
+        <span class="role-badge">适用：Sales / Care / Admin</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">在学生档案页（<code>/admin/ts-crm/students/{id}</code>）按「Edit」可修改学生 Email，或直接在档案页寄出重设密码信。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num">1</span><div>修改「Email」栏位后按右侧「Save」储存（只读演示不送出）。</div></div>
+            <div class="step-item"><span class="step-num gold">2</span><div>若学生只是忘了密码且信箱正确，在档案页右上按「Send reset link」即可发重设信。</div></div>
           </div>
+          <div class="warn-box"><strong>重要规则：</strong>学生登入 ID 就是 Email！帮学生改了 Email 等于换掉登入帐号，务必同步通知家长与学生。</div>
+        </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t5_s1_staff_edit.png" alt="员工修改学生 Email" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 18: Topic 4 - 组别加分与 Care -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 4 · STUDENTS BEHAVIOUR <span class="role-tag">Care / Coach</span></div>
-          <h2 class="slide-title">4.2 组别积分激励与 Care 关心名单</h2>
-          <p class="slide-subtitle">小组竞赛激发求知欲，异常出勤提早关怀</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>组别积分（Group Points）：</strong>上课回答问题、积极互动，老师现场为组别加分。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>Care 关心名单（/ts-care）：</strong>连续缺席 2 次或作业未交的学生，系统自动亮红灯标入 Care 清单。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>跟进纪录留档：</strong>Care 教练电访家长后直接在线写 Follow-up 笔记，全团队可见。</div>
-            </div>
-          </div>
+    <section class="slide" data-topic="5">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 5 · 学生 Email 与密码</span>
+          <h2 class="slide-title">5.2 员工直接替学生重设密码（Edit User）</h2>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_16_class_records_roster.png" alt="Class Records Roster">
+        <span class="role-badge">适用：Admin</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">若学生收不到重设信或没有 Email，具备权限的员工可由学生档案页「Edit User」（<code>/admin/users/{user_id}/edit</code>）直接重设密码。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num gold">1</span><div>先核对「Email:」或「Mobile:」登入帐号是否正确。</div></div>
+            <div class="step-item"><span class="step-num">2</span><div>在「Password」栏输入新密码，拉到页面底部按储存即可立即生效（演示不实际送出）。</div></div>
           </div>
+          <div class="tip-box">系统「Edit Student」页面底部亦有提示：若需直接修改密码或角色，请点击前往「Edit User」。</div>
+        </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t5_s2_staff_pwd.png" alt="Edit User 重设密码" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 19: Topic 5 - 员工帮学生改账号密码 -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 5 · 学生 EMAIL 与密码 <span class="role-tag">Staff 权限</span></div>
-          <h2 class="slide-title">5.1 员工帮学生修改 Email 与密码</h2>
-          <p class="slide-subtitle">客服与 Care 必备技能：处理家长登入障碍</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>学生登入 ID 就是 Email：</strong>进入学生档案编辑页（Edit），修改 Email 栏位即更换了学生的登入账号！</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>重设密码（New Password）：</strong>在密码栏直接输入新密码后保存，密码立即更新。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>必须告知家长：</strong>改了 Email 必须明确告知家长以新 Email 登入，避免家长依然使用旧账号导致无法登入！</div>
-            </div>
-          </div>
-          <div class="callout-box">
-            ⚠️ 重要原则：学生登入 ID 就是 Email，改了等同换账号，必须 WhatsApp 告知家长！
-          </div>
+    <section class="slide" data-topic="5">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 5 · 学生 Email 与密码</span>
+          <h2 class="slide-title">5.3 学生自己改密码 &amp; 「Forgot password?」</h2>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_18_admin_edit_credentials.png" alt="Admin Edit Credentials">
+        <span class="role-badge">适用：学生（桌面 / 手机）</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">学生登入后可在「设置」（<code>/panel/setting</code>）自行换密码；忘记密码则在登入页按「Forgot password?」。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num">1</span><div><strong>已登入改密码</strong>：进入「设置」→「换密码」输入「新密码」与「再打一次」（至少 6 字、勿用自己名字），按「换密码」。</div></div>
+            <div class="step-item"><span class="step-num gold">2</span><div><strong>忘记密码</strong>：在登入页点「Forgot password?」→ 输入 Email → 按「Send me the email」收重设信。</div></div>
           </div>
+          <div class="tip-box">学生若在「我的资料」点「修改」名字或 Email，会送交后台「Profile Requests」审核后才生效。</div>
+        </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t5_s3_student_pwd.png" alt="学生设置页改密码" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 20: Topic 5 - 学生自己改与忘记密码 -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 5 · 学生 EMAIL 与密码 <span class="role-tag">自助修改</span></div>
-          <h2 class="slide-title">5.2 学生自主修改与忘记密码</h2>
-          <p class="slide-subtitle">自助服务降低客服负荷，全自动化信件重设</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>登入后自主改密：</strong>学生在主页进入「Setting」→「Security / Change Password」输入旧密码即可更换新密码。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>忘密码流程：</strong>在登入页点击「Forgot password?」，输入绑定的 Email。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>信箱收取重设连结：</strong>系统立即寄出带安全 Token 的重设信，点击即可自行设定新密码。</div>
-            </div>
-          </div>
+    <!-- TOPIC 6: BANA GAMES (2 slides) -->
+    <section class="slide" data-topic="6">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 6 · Bana Games</span>
+          <h2 class="slide-title">6.1 学生端首页 Bana 入口（桌面 / 手机皆同）</h2>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_19_student_setting_pwd.png" alt="Student Setting Password">
+        <span class="role-badge">适用：学生</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">学生登入 LMS 首页（<code>/panel</code>）后，不需另外记游戏帐号密码，直接从顶部香蕉角色进入 Bana Games。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num">1</span><div>在首页左上角问候卡点击香蕉图示／「Lv 1 Bana」入口（连结至 <code>/panel/bana/go</code>）。</div></div>
+            <div class="step-item"><span class="step-num gold">2</span><div>桌面版与手机版（390px）皆位于首页最上方，一点即跳转。</div></div>
           </div>
+          <div class="tip-box">系统会透过 SSO 单一签入带入学生身分与等级资料，无需重新输入密码。</div>
+        </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t6_s1_bana_entry.png" alt="学生首页 Bana 入口" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 21: Topic 6 - Bana Games 入口 -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 6 · BANA GAMES 进入方式 <span class="role-tag">免密码 SSO</span></div>
-          <h2 class="slide-title">6.1 学生端首页 Bana Games 入口</h2>
-          <p class="slide-subtitle">将游戏化学习融入日常：无感单点登录直达游戏</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>首页黄金入口卡片：</strong>学生登录后，在个人首页右上角醒目位置即可看到「Bana Games」专属卡片。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>一键点击免输入帐密：</strong>点击「Play Now」自动呼叫 `/bana/go` 授权跳转通道。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>首次自动开户：</strong>如果该学生是第一次玩，系统会在后台 0.5 秒内自动创建对应游戏账号！</div>
-            </div>
+    <section class="slide" data-topic="6">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 6 · Bana Games</span>
+          <h2 class="slide-title">6.2 免密码进游戏，首次进入自动开帐号</h2>
+        </div>
+        <span class="role-badge">适用：学生 / 教练课堂</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">点击入口后经 <code>/panel/bana/go</code> 验证完成即自动跳进 <strong>Bana Word Challenge</strong>（<code>game.topscholar.cloud</code>）。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num gold">1</span><div>右上角自动显示学生名称（如「学生 · [TEST] GOH MEI MEI」）；<strong>首次进入会自动开好 Bana 帐号</strong>。</div></div>
+            <div class="step-item"><span class="step-num">2</span><div>上课时输入老师提供的「课堂码」按「加入等候室 →」，课后也可点「错题集合」「我的课后作业」或「照顾 Bana →」。</div></div>
           </div>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_21_student_bana_entry.png" alt="Bana Entry">
-          </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t6_s2_bana_world.png" alt="Bana Word Challenge 免密登入画面" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
         </div>
       </div>
     </section>
 
-    <!-- Slide 22: Topic 6 - Bana World 游戏界面 -->
-    <section class="slide">
-      <div class="slide-grid">
-        <div class="content-pane">
-          <div class="topic-pill">TOPIC 6 · BANA GAMES 进入方式 <span class="role-tag">游戏世界</span></div>
-          <h2 class="slide-title">6.2 自动进入 Bana World 互动世界</h2>
-          <p class="slide-subtitle">积分互通、单词挑战与角色成就</p>
-          <div class="bullet-list">
-            <div class="bullet-item">
-              <div class="bullet-num">1</div>
-              <div><strong>无缝进入游戏：</strong>学生无需二次输入任何密码，直接载入 3D/2D 游戏世界。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">2</div>
-              <div><strong>Bana Word Challenge：</strong>课堂生词与题库自动融入游戏关卡，玩游戏即是复习功课。</div>
-            </div>
-            <div class="bullet-item">
-              <div class="bullet-num">3</div>
-              <div><strong>成长等级挂钩：</strong>在游戏中获得的香蕉积分与徽章，将同步展示在 LMS 个人成长等级中！</div>
-            </div>
+    <!-- Closing Slide -->
+    <section class="slide" data-topic="0">
+      <div class="cover-wrap">
+        <span class="eyebrow">重点复盘 &amp; 待确认清单</span>
+        <h1 class="cover-title">日常操作<span>四大铁律</span>与问答</h1>
+        <div class="topic-grid" style="grid-template-columns: repeat(2, 1fr); margin-top: 20px;">
+          <div class="topic-card" style="cursor:default;">
+            <div class="num">RULE 01 · EMAIL = 登入 ID</div>
+            <h3>改 Email 前务必先提醒家长</h3>
+            <p>学生登入 ID 就是 Email，后台修改后原 Email 将无法登入；若只改密码可优先用「Send reset link」。</p>
+          </div>
+          <div class="topic-card" style="cursor:default;">
+            <div class="num">RULE 02 · 功课设定联动</div>
+            <h3>File types 多选 &amp; Speaking 录音</h3>
+            <p>勾「Speaking」后「Audio」自动勾选锁住，学生端会同步显示「录音」按钮与「音频」上传图示。</p>
+          </div>
+          <div class="topic-card" style="cursor:default;">
+            <div class="num">RULE 03 · 换班先按 Preview</div>
+            <h3>Change time vs Swap one vs Transfer</h3>
+            <p>永久换班用「Change time」，临时旁听一堂用「Swap one」，剩余期数过户他人用「Transfer」，送出前一律先「Preview」。</p>
+          </div>
+          <div class="topic-card" style="cursor:default;">
+            <div class="num">待确认（由 Elson 现场补充）</div>
+            <h3>现场确认项目</h3>
+            <p>1. 测验汇入格式另有独立教程，本次不讲。<br>2. 「学生页面怎样换」是否需补充「Pause 暂停」或「Convert 换配套」示范。<br>3. Bana Games 资格范围（目前已对 11 月预习班新生开启免密 SSO）。</p>
           </div>
         </div>
-        <div class="media-pane">
-          <div class="screenshot-card" onclick="openLightbox(this)">
-            <img src="assets/annotated/ann_22_bana_world.png" alt="Bana World">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Slide 23: 规则总结与 FAQ -->
-    <section class="slide">
-      <div class="slide-grid single">
-        <div class="content-pane" style="align-items:center;">
-          <div class="topic-pill">CRITICAL RULES · 员工必知铁律</div>
-          <h2 class="slide-title">新系统关键规范与避坑指南</h2>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; margin-top: 24px; text-align: left;">
-            <div class="bullet-item" style="border-left-color: var(--red);">
-              <div class="bullet-num" style="background:var(--red); color:#fff;">1</div>
-              <div>
-                <strong style="color:#FEB2B2;">学生登入 ID 即是 Email</strong>
-                <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">改了学生 Email 等于改了其系统登入账号。更改后必须第一时间通知家长，否则会导致登入失败！</p>
-              </div>
-            </div>
-            <div class="bullet-item" style="border-left-color: var(--gold);">
-              <div class="bullet-num">2</div>
-              <div>
-                <strong style="color:var(--gold-light);">功课 File types 需多选</strong>
-                <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">布置作业时若需要语音提交，必须勾选「Speaking」！勾选后学生端手机才会显示录音麦克风。</p>
-              </div>
-            </div>
-            <div class="bullet-item" style="border-left-color: var(--blue);">
-              <div class="bullet-num" style="background:var(--blue); color:#fff;">3</div>
-              <div>
-                <strong style="color:#90CDF4;">临时调课用「Swap Class」</strong>
-                <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">单堂请假补课切勿使用「Change Time」，以免把整个学期的班级都永久改掉。</p>
-              </div>
-            </div>
-            <div class="bullet-item" style="border-left-color: var(--green);">
-              <div class="bullet-num" style="background:var(--green); color:#fff;">4</div>
-              <div>
-                <strong style="color:#9AE6B4;">测验与考试另有专题培训</strong>
-                <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">本次培训专注于日常 6 大业务，Quiz 与考试批量导入格式将于下期专题进行讲解。</p>
-              </div>
-            </div>
-          </div>
+        <div style="margin-top: 24px; display: flex; gap: 14px;">
+          <a href="guide.html" class="hud-btn" style="background: var(--gold); color:#0b0e14; font-size:17px; padding:10px 22px;">打开分步教程 ＋ 动画导览 (guide.html) →</a>
+          <a href="guide.pdf" class="hud-btn" style="font-size:17px; padding:10px 22px;" download>下载完整 PDF (guide.pdf)</a>
         </div>
       </div>
     </section>
+  </main>
 
-    <!-- Slide 24: Q&A 与结语 -->
-    <section class="slide">
-      <div class="slide-grid single">
-        <div class="content-pane" style="align-items:center;">
-          <div class="topic-pill">TOP SCHOLAR LMS · 培训总结</div>
-          <h2 class="slide-title" style="font-size: 40px;">Q & A 提问与交流</h2>
-          <p class="slide-subtitle" style="font-size: 18px; max-width: 680px; margin-top: 10px;">
-            请大家登录测试账号实际上手练习。遇到任何问题，欢迎随时提问！
-          </p>
-          <div style="margin-top: 36px; display: flex; gap: 20px;">
-            <a href="guide.html" class="btn-icon" style="text-decoration:none; padding: 12px 28px; font-size: 16px; background: var(--gold); border-color: var(--gold); color: #fff;">
-              📖 前往分步操作教程网站
-            </a>
-            <button class="btn-icon" onclick="goToSlide(0)" style="padding: 12px 24px; font-size: 16px;">
-              ⏮ 回到简报首页
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </div>
-
-  <!-- Floating Nav Controls -->
-  <button class="nav-arrow nav-prev" onclick="prevSlide()" title="上一页 (←)">‹</button>
-  <button class="nav-arrow nav-next" onclick="nextSlide()" title="下一页 (→)">›</button>
-
-  <!-- TOC Modal -->
-  <div id="toc-modal" onclick="if(event.target===this) toggleToc()">
-    <div class="toc-card">
-      <div class="toc-title">
-        <span>培训简报目录索引</span>
-        <button class="btn-icon" onclick="toggleToc()">✕ 关闭</button>
-      </div>
-      <div class="toc-grid" id="toc-grid"></div>
+  <footer class="hud-bottom">
+    <div class="kbd-hint">键盘快捷键：← / → 或 Space 翻页 · F 全屏 · 点击截图可放大</div>
+    <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="nav-btns">
+      <button class="nav-btn" id="btnPrev">← 上一页</button>
+      <button class="nav-btn" id="btnNext">下一页 →</button>
     </div>
-  </div>
+  </footer>
 
-  <!-- Lightbox -->
-  <div id="lightbox" onclick="closeLightbox()">
-    <img id="lightbox-img" src="" alt="Zoomed Screenshot">
+  <div class="lightbox" id="lightbox" onclick="closeZoom()">
+    <img id="lightboxImg" src="" alt="Zoomed screenshot" />
   </div>
 
   <script>
     const slides = Array.from(document.querySelectorAll('.slide'));
-    let currentSlide = 0;
-    const totalSlides = slides.length;
+    const counter = document.getElementById('slideCounter');
+    const progressBar = document.getElementById('progressBar');
+    const pillsEl = document.getElementById('topicPills');
+    let idx = 0;
 
-    const counter = document.getElementById('counter');
-    const progressBar = document.getElementById('progress-bar');
-    const tocGrid = document.getElementById('toc-grid');
+    const TOPICS = [
+      { id: 0, label: '总览' },
+      { id: 1, label: '1. Enrolment' },
+      { id: 2, label: '2. 换班/转课' },
+      { id: 3, label: '3. 功课' },
+      { id: 4, label: '4. Behaviour' },
+      { id: 5, label: '5. Email/密码' },
+      { id: 6, label: '6. Bana' }
+    ];
 
-    // Build TOC
-    slides.forEach((s, idx) => {
-      const title = s.querySelector('.slide-title')?.innerText || `Slide ${idx+1}`;
-      const topic = s.querySelector('.topic-pill')?.innerText || '';
-      const item = document.createElement('div');
-      item.className = 'toc-item';
-      item.innerHTML = `<div class="toc-item-num">PAGE ${String(idx+1).padStart(2, '0')} · ${topic.split('·')[0].trim()}</div><div class="toc-item-text">${title}</div>`;
-      item.onclick = () => {
-        goToSlide(idx);
-        toggleToc();
-      };
-      tocGrid.appendChild(item);
+    TOPICS.forEach(t => {
+      const btn = document.createElement('button');
+      btn.className = 'topic-pill';
+      btn.textContent = t.label;
+      btn.dataset.topic = t.id;
+      btn.onclick = () => goToTopic(t.id);
+      pillsEl.appendChild(btn);
     });
 
-    function updateSlide() {
-      slides.forEach((s, idx) => {
-        s.classList.toggle('active', idx === currentSlide);
+    function showSlide(n) {
+      idx = Math.max(0, Math.min(slides.length - 1, n));
+      slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+      counter.textContent = `${idx + 1} / ${slides.length}`;
+      progressBar.style.width = `${((idx + 1) / slides.length) * 100}%`;
+      const activeTopic = slides[idx].dataset.topic;
+      document.querySelectorAll('.topic-pill').forEach(p => {
+        p.classList.toggle('active', p.dataset.topic === activeTopic);
       });
-      counter.innerText = `${String(currentSlide + 1).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}`;
-      progressBar.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
-    }
-
-    function nextSlide() {
-      if (currentSlide < totalSlides - 1) {
-        currentSlide++;
-        updateSlide();
+      if (location.hash !== `#${idx + 1}`) {
+        history.replaceState(null, '', `#${idx + 1}`);
       }
     }
 
-    function prevSlide() {
-      if (currentSlide > 0) {
-        currentSlide--;
-        updateSlide();
-      }
+    function goToTopic(topicId) {
+      const target = slides.findIndex(s => Number(s.dataset.topic) === topicId);
+      if (target !== -1) showSlide(target);
     }
 
-    function goToSlide(idx) {
-      if (idx >= 0 && idx < totalSlides) {
-        currentSlide = idx;
-        updateSlide();
-      }
-    }
-
-    function toggleFullScreen() {
+    function toggleFullscreen() {
       if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(() => {});
+        document.documentElement.requestFullscreen?.();
       } else {
-        document.exitFullscreen().catch(() => {});
+        document.exitFullscreen?.();
       }
     }
 
-    function toggleToc() {
-      document.getElementById('toc-modal').classList.toggle('active');
+    function openZoom(src) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightbox').classList.add('open');
+    }
+    function closeZoom() {
+      document.getElementById('lightbox').classList.remove('open');
     }
 
-    function openLightbox(card) {
-      const img = card.querySelector('img');
-      if (!img) return;
-      document.getElementById('lightbox-img').src = img.src;
-      document.getElementById('lightbox').classList.add('active');
-    }
+    document.getElementById('btnPrev').onclick = () => showSlide(idx - 1);
+    document.getElementById('btnNext').onclick = () => showSlide(idx + 1);
+    document.getElementById('btnFullscreen').onclick = toggleFullscreen;
 
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('active');
-    }
-
-    // Keyboard Shortcuts
-    document.addEventListener('keydown', (e) => {
-      if (document.getElementById('toc-modal').classList.contains('active')) {
-        if (e.key === 'Escape') toggleToc();
-        return;
-      }
-      if (document.getElementById('lightbox').classList.contains('active')) {
-        if (e.key === 'Escape') closeLightbox();
-        return;
-      }
-
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { closeZoom(); return; }
       if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
-        e.preventDefault();
-        nextSlide();
+        e.preventDefault(); showSlide(idx + 1);
       } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-        e.preventDefault();
-        prevSlide();
+        e.preventDefault(); showSlide(idx - 1);
       } else if (e.key === 'Home') {
-        e.preventDefault();
-        goToSlide(0);
+        e.preventDefault(); showSlide(0);
       } else if (e.key === 'End') {
-        e.preventDefault();
-        goToSlide(totalSlides - 1);
+        e.preventDefault(); showSlide(slides.length - 1);
       } else if (e.key === 'f' || e.key === 'F') {
-        e.preventDefault();
-        toggleFullScreen();
-      } else if (e.key === 'm' || e.key === 'M') {
-        e.preventDefault();
-        toggleToc();
+        toggleFullscreen();
       }
     });
 
-    // Touch Swipe
-    let touchStartX = 0;
-    document.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, false);
-    document.addEventListener('touchend', (e) => {
-      const touchEndX = e.changedTouches[0].screenX;
-      if (touchEndX < touchStartX - 50) nextSlide();
-      if (touchEndX > touchStartX + 50) prevSlide();
-    }, false);
+    // Touch swipe support
+    let touchX = 0;
+    document.addEventListener('touchstart', e => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+    document.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 50) showSlide(dx < 0 ? idx + 1 : idx - 1);
+    }, { passive: true });
 
-    updateSlide();
+    const hashN = parseInt(location.hash.replace('#', ''), 10);
+    showSlide(!isNaN(hashN) && hashN >= 1 && hashN <= slides.length ? hashN - 1 : 0);
   </script>
 </body>
 </html>

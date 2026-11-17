@@ -49,10 +49,10 @@
     "boxes": [
       {
         "rect": [
-          29,
-          44,
-          36,
-          48
+          28.8,
+          62.5,
+          35.6,
+          67
         ],
         "num": "1",
         "color": "gold",
@@ -636,8 +636,8 @@
         ],
         "num": "2",
         "color": "gold",
-        "label": "同时支持上传「照片」「文件 / PDF」与「音频」图示",
-        "pos": "bottom"
+        "label": "支持「照片」「文件 / PDF」「音频」",
+        "pos": "right"
       },
       {
         "rect": [
@@ -754,14 +754,14 @@
       {
         "rect": [
           20,
-          46,
+          45,
           50,
           55
         ],
         "num": "1",
         "color": "gold",
-        "label": "选堂次「CLASS C1–C4」与「Points / Homework / Stars」分页",
-        "pos": "top"
+        "label": "选堂次「CLASS C1–C4」",
+        "pos": "right"
       },
       {
         "rect": [

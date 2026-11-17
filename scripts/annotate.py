@@ -33,7 +33,7 @@ SPECS = [
         "raw": "t1_02b_enrollment_ai_parse.png",
         "out": "t1_s2_ai_parse.png",
         "boxes": [
-            {"rect": [29, 44, 36, 48], "num": "1", "color": "gold", "label": "新生点「New student」", "pos": "right"},
+            {"rect": [28.8, 62.5, 35.6, 67], "num": "1", "color": "gold", "label": "新生点「New student」", "pos": "right"},
             {"rect": [20, 11, 96, 36], "num": "2", "color": "red", "label": "贴上家长资料到「Paste from WhatsApp / Google Form」", "pos": "bottom"},
             {"rect": [20.5, 37.5, 25.5, 42], "num": "3", "color": "red", "label": "按「Read it」让 AI 拆解并填表（黄色栏位需人工核对）", "pos": "right"},
         ],
@@ -184,7 +184,7 @@ SPECS = [
         "out": "t3_s6_student_speaking.png",
         "boxes": [
             {"rect": [3.5, 49, 70, 55], "num": "1", "color": "red", "label": "勾选 Speaking 后显示「录音」按钮，可直接在网页录口说", "pos": "top"},
-            {"rect": [3.5, 56, 70, 73], "num": "2", "color": "gold", "label": "同时支持上传「照片」「文件 / PDF」与「音频」图示", "pos": "bottom"},
+            {"rect": [3.5, 56, 70, 73], "num": "2", "color": "gold", "label": "支持「照片」「文件 / PDF」「音频」", "pos": "right"},
             {"rect": [3.5, 74, 70, 81], "num": "3", "color": "red", "label": "确认档案后按「交出去」（正式系统不实际送出）", "pos": "bottom"},
         ],
     },
@@ -220,7 +220,7 @@ SPECS = [
         "raw": "t4_01b_class_records_roster.png",
         "out": "t4_s2_cr_points.png",
         "boxes": [
-            {"rect": [20, 46, 50, 55], "num": "1", "color": "gold", "label": "选堂次「CLASS C1–C4」与「Points / Homework / Stars」分页", "pos": "top"},
+            {"rect": [20, 45, 50, 55], "num": "1", "color": "gold", "label": "选堂次「CLASS C1–C4」", "pos": "right"},
             {"rect": [20, 60, 95, 69], "num": "2", "color": "red", "label": "快选组别并按「+500」「+1,000」等按钮批量加组别分", "pos": "top"},
             {"rect": [20, 75, 96, 98], "num": "3", "color": "gold", "label": "下方可针对单组输入分数按「+」即时加分", "pos": "top"},
         ],
