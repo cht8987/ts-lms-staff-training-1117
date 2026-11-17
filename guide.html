@@ -595,13 +595,19 @@
           <div class="step-img-wrap"><img src="assets/annotated/t2_s5_transfer.png" alt="Transfer 转课" onclick="openZoom(this.src)" /></div>
         </div>
 
+        <div class="step-card">
+          <div class="step-header"><span class="step-pill">Step 5</span><h3>暂停课程「Pause」与换配套「Convert」</h3></div>
+          <p class="step-desc"><strong>Pause 暂停</strong>（<code>/admin/ts-crm/students/{id}/pause</code>）：确认目前课表后，选「First term to pause」与暂停几期「How many terms」，按「Preview」试算新恢复期数再确认送出（只会往后顺延）。若需把未上完期数价值折抵换新配套并补差价，则在订单页进入 <strong>Convert</strong>（<code>/admin/ts-crm/enrollment/{id}/convert</code>）。</p>
+          <div class="step-img-wrap"><img src="assets/annotated/t2_s6_pause.png" alt="Pause 暂停课程" onclick="openZoom(this.src)" /></div>
+        </div>
+
         <div class="faq-box">
           <h4>常见问题与注意事项</h4>
           <ul>
             <li>「Change time」与「Swap one class」皆不改动原订单与金额，但送出前务必先按「Preview」核对影响范围。</li>
             <li>「Transfer」仅转出尚未开始的期数名额，原订单收款与账务仍留在原学生帐下。</li>
-            <li>若学生只有当期课程、没有后续期数，Transfer 页会提示无可转出课程。</li>
-            <li>其他进阶动作（如「Pause」暂停或「Convert」换配套）是否纳入本梯次培训：<span class="pending-tag">待确认</span></li>
+            <li>若学生只有当期课程、没有后续期数，Transfer 与 Convert 页皆会提示无剩余期数可操作。</li>
+            <li>「Pause」只能将课程往后顺延，不能提前；学生也可通过「Resume」恢复已暂停期数。</li>
           </ul>
         </div>
 
@@ -702,17 +708,32 @@
         </div>
 
         <div class="step-card">
-          <div class="step-header"><span class="step-pill">Step 3</span><h3>学生个人 Care 关怀页与 Health light</h3></div>
+          <div class="step-header"><span class="step-pill">Step 3</span><h3>Live 直播课入口（<code>/admin/ts-care/live</code>）</h3></div>
+          <p class="step-desc">上课时教练直接打开「Live classes」（<code>/admin/ts-care/live</code>），切换「Today / Tomorrow / This week」，确认该堂课为「Zoom ready」后按「Enter class」进入直播控制页。</p>
+          <div class="step-img-wrap"><img src="assets/annotated/t4_s4_live_index.png" alt="Live 直播课入口" onclick="openZoom(this.src)" /></div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-header"><span class="step-pill">Step 4</span><h3>Live 直播课页：即时加分 ＋ Zoom 助手 ＋ Class chat</h3></div>
+          <p class="step-desc">进入课堂直播页（<code>/admin/ts-care/live/{sessionId}</code>）后，上方可搜寻学生/组别或点快捷群组，选分数按「Add」即时加分；按「Join as assistant」让静音助手进入 Zoom 抓取出席名单，右侧「Class chat」同步显示课堂留言。</p>
+          <div class="step-img-wrap"><img src="assets/annotated/t4_s5_live_class.png" alt="Live 直播课操作页" onclick="openZoom(this.src)" /></div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-header"><span class="step-pill">Step 5</span><h3>学生个人 Care 关怀页与 Health light</h3></div>
           <p class="step-desc">点击学生档案右上角「Care record」或进入 <code>/admin/ts-care/student/{id}</code>：上方「+ Log a contact」填联络记录按「Save entry」，中段「Learning history」查看出席/功课/Poll 纪录，下方可看「Health light」灯号与排程「Schedule a follow-up」。</p>
           <div class="step-img-wrap"><img src="assets/annotated/t4_s3_care_student.png" alt="学生 Care 页面" onclick="openZoom(this.src)" /></div>
         </div>
 
         <div class="faq-box">
-          <h4>常见问题与注意事项</h4>
+          <h4>《国英特训加分表》正式规则与注意事项</h4>
           <ul>
-            <li>上课时另有专用直播页（<code>/admin/ts-care/live</code>），Class Records 则用于课后查核与整班/组别加分。</li>
+            <li><strong>未指定分数一律加 +30 分</strong>：老师口头说加分但未讲几分时，直接按「+30 no amount said」。</li>
+            <li><strong>各年段快捷加分档位</strong>：<code>Y1-Y3</code> / <code>Y4-Y6</code> / <code>F4-F5</code> 为 <code>500 / 1,000 / 2,000 / 3,000 / 5,000</code>；<code>F1-F3</code> 为 <code>100 / 200 / 1,000 / 10,000 / 20,000</code>。</li>
+            <li><strong>扣分、上限与 10 秒内撤销</strong>：可直接输入负整数扣分（例如 <code>-100</code>，不可填 0 或小数；单笔上限 100,000 分）；送出后 <strong>10 秒内</strong> 可按「Undo」整批撤销自己那一笔，超时须由 Admin 在「Points log」处理（扣分原因至少 3 个字）。</li>
+            <li><strong>G01 线下班与 Zoom 1/2 分区</strong>：<code>G01</code> 为线下上课组；在 <code>Y4-Y6</code> 与 <code>F1-F3</code>，单数组（不含 G01）为 Zoom 1、双数组为 Zoom 2，点「Odd groups (not G01)」不会误加到线下 G01。</li>
+            <li><strong>功课完成／功课之星旧制已退休</strong>：不再从课堂加分面板发放「完成功课 +500 / 功课之星 +3000」，学生之星／功课组别之星改由专门的 Stars 页统一颁发。</li>
             <li>截图或外传名单前，务必确认已遮罩所有非测试学生的姓名、学号、电话与 Email。</li>
-            <li>课堂行为标签与加分扣分标准细节（若有新版规章）：<span class="pending-tag">待确认</span></li>
           </ul>
         </div>
 
@@ -804,7 +825,7 @@
           <ul>
             <li>若学生反映进不去游戏，请先确认他是从 LMS 首页点击香蕉入口（<code>/panel/bana/go</code>），而不是直接开旧连结。</li>
             <li>首次进入时系统会自动建好 Bana 帐号与初始宠物，无需手动注册。</li>
-            <li>目前已针对 11 月预习班新生开启免密 SSO，正式班全面开放范围：<span class="pending-tag">待确认</span></li>
+            <li>目前免密码 SSO 已对 <strong>11 月预习班新生</strong> 开放（其他班别学生会导至 Bana 自行登入；正式班全面开放时间待公布）。</li>
           </ul>
         </div>
 

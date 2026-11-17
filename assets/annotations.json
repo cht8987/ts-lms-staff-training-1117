@@ -444,6 +444,49 @@
     ]
   },
   {
+    "id": "t2_s6_pause",
+    "raw": "t2_06_pause.png",
+    "out": "t2_s6_pause.png",
+    "boxes": [
+      {
+        "rect": [
+          20,
+          18,
+          64,
+          43
+        ],
+        "num": "1",
+        "color": "gold",
+        "label": "先确认目前课表与下一个恢复期数",
+        "pos": "right"
+      },
+      {
+        "rect": [
+          20,
+          49,
+          64,
+          90
+        ],
+        "num": "2",
+        "color": "gold",
+        "label": "选「First term to pause」与「How many terms」（仅往后顺延）",
+        "pos": "right"
+      },
+      {
+        "rect": [
+          20.5,
+          91,
+          26.5,
+          96
+        ],
+        "num": "3",
+        "color": "red",
+        "label": "按「Preview」试算后再确认暂停（演示不送出）",
+        "pos": "right"
+      }
+    ]
+  },
+  {
     "id": "t3_s1_admin_list",
     "raw": "t3_01_admin_homework_list.png",
     "out": "t3_s1_admin_list.png",
@@ -829,6 +872,80 @@
         "color": "red",
         "label": "「Health light」自动信号灯与「Schedule a follow-up」",
         "pos": "top"
+      }
+    ]
+  },
+  {
+    "id": "t4_s4_live_index",
+    "raw": "t4_03_care_live_index.png",
+    "out": "t4_s4_live_index.png",
+    "boxes": [
+      {
+        "rect": [
+          19,
+          18,
+          38,
+          24
+        ],
+        "num": "1",
+        "color": "gold",
+        "label": "切换「Today / Tomorrow / This week」找当日课堂",
+        "pos": "right"
+      },
+      {
+        "rect": [
+          19,
+          25,
+          38,
+          61
+        ],
+        "num": "2",
+        "color": "red",
+        "label": "确认科目时段与「Zoom ready」，按「Enter class」进直播页",
+        "pos": "right"
+      }
+    ]
+  },
+  {
+    "id": "t4_s5_live_class",
+    "raw": "t4_04_care_live_show.png",
+    "out": "t4_s5_live_class.png",
+    "boxes": [
+      {
+        "rect": [
+          19,
+          19,
+          73,
+          31
+        ],
+        "num": "1",
+        "color": "red",
+        "label": "搜寻学生/组别或点快捷群组，选分数按「Add」即时加分（10 秒内可 Undo）",
+        "pos": "bottom"
+      },
+      {
+        "rect": [
+          36,
+          73,
+          55,
+          81
+        ],
+        "num": "2",
+        "color": "gold",
+        "label": "按「Join as assistant」让助手静音进 Zoom 抓出席与聊天",
+        "pos": "top"
+      },
+      {
+        "rect": [
+          74,
+          19,
+          98,
+          95
+        ],
+        "num": "3",
+        "color": "gold",
+        "label": "右侧「Class chat」同步显示课堂聊天室",
+        "pos": "left"
       }
     ]
   },

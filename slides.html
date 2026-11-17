@@ -428,7 +428,7 @@
       <a href="index.html" class="hud-btn">返回目录</a>
       <a href="guide.html" class="hud-btn">图文教程</a>
       <button class="hud-btn" id="btnFullscreen" title="全屏 (F)">⛶ 全屏</button>
-      <div class="slide-counter" id="slideCounter">1 / 21</div>
+      <div class="slide-counter" id="slideCounter">1 / 23</div>
     </div>
   </header>
 
@@ -645,6 +645,30 @@
       </div>
     </section>
 
+    <section class="slide" data-topic="2">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 2 · 学生页面怎样换</span>
+          <h2 class="slide-title">2.4 暂停课程（Pause）与换配套（Convert）</h2>
+        </div>
+        <span class="role-badge">适用：Sales / Admin</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">学生若暂时休学可用「Pause」顺延剩余期数；若要升级或改换配套则在订单页点「Convert」。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num gold">1</span><div><strong>Pause 暂停</strong>（<code>/students/{id}/pause</code>）：确认当前课表与下一恢复期数后，选「First term to pause」与暂停几期「How many terms」。</div></div>
+            <div class="step-item"><span class="step-num">2</span><div>一律先按「Preview」试算新课表再确认送出（演示不送出）；暂停只会把剩余期数往后顺延。</div></div>
+          </div>
+          <div class="tip-box"><strong>Convert 换配套</strong>（<code>/enrollment/{id}/convert</code>）：将尚未使用完的期数价值折抵成新配套并补差价（需该订单在当期之后仍有未上课期数）。</div>
+        </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t2_s6_pause.png" alt="Pause 暂停课程" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
+        </div>
+      </div>
+    </section>
+
     <!-- TOPIC 3: HOMEWORK (4 slides) -->
     <section class="slide" data-topic="3">
       <div class="slide-header">
@@ -742,7 +766,7 @@
       </div>
     </section>
 
-    <!-- TOPIC 4: STUDENTS BEHAVIOUR (3 slides) -->
+    <!-- TOPIC 4: STUDENTS BEHAVIOUR (4 slides) -->
     <section class="slide" data-topic="4">
       <div class="slide-header">
         <div class="slide-title-group">
@@ -770,17 +794,17 @@
       <div class="slide-header">
         <div class="slide-title-group">
           <span class="topic-tag">主题 4 · Students Behaviour</span>
-          <h2 class="slide-title">4.2 课堂表现与 Group Points 组别加分</h2>
+          <h2 class="slide-title">4.2 Group Points 组别加分与《国英特训加分表》规则</h2>
         </div>
         <span class="role-badge">适用：教练 / 助教</span>
       </div>
       <div class="slide-body">
         <div class="notes-col">
-          <div class="summary-box">进入班级后，可在「Group points」面板按堂次为全组、单双数或指定组别即时加分。</div>
+          <div class="summary-box">进入班级后，可在「Group points」面板依堂次与来源（Live / Replay / Homework / Night）为组别加扣分。</div>
           <div class="steps-list">
-            <div class="step-item"><span class="step-num gold">1</span><div>选定「CLASS C1–C4」堂次与课程类型（Live class / Replay / Homework class / Night class）。</div></div>
-            <div class="step-item"><span class="step-num">2</span><div>点「All groups / Odd groups / Even groups」或勾选多组后按「+500」「+1,000」批量加分。</div></div>
-            <div class="step-item"><span class="step-num gold">3</span><div>也可在单组列输入分数并按右侧「+」即时记分（下方学生明细已遮罩处理）。</div></div>
+            <div class="step-item"><span class="step-num gold">1</span><div>老师说加分但未讲几分：固定按「+30 no amount said」（<strong>+30 分</strong>）；快捷钮依年段（Y1–Y6 / F4–F5 为 500–5,000；F1–F3 为 100–20,000）。</div></div>
+            <div class="step-item"><span class="step-num">2</span><div><code>G01</code> 为线下组（Offline）；Y4–Y6 与 F1–F3 单数组（不含 G01）为 Zoom 1、双数为 Zoom 2，点「Odd groups (not G01)」不会误加线下组。</div></div>
+            <div class="step-item"><span class="step-num gold">3</span><div>可直接输入负整数扣分（上限 100,000），加错 <strong>10 秒内</strong> 可按「Undo」整批撤销；旧制功课+500／之星+3000已改由 Stars 页颁发。</div></div>
           </div>
         </div>
         <div class="shot-col">
@@ -794,13 +818,37 @@
       <div class="slide-header">
         <div class="slide-title-group">
           <span class="topic-tag">主题 4 · Students Behaviour</span>
-          <h2 class="slide-title">4.3 学生个人 Care 关怀页与 Health light</h2>
+          <h2 class="slide-title">4.3 Live 直播课页：课堂即时加分 ＋ Zoom 助手</h2>
+        </div>
+        <span class="role-badge">适用：教练（上课时使用）</span>
+      </div>
+      <div class="slide-body">
+        <div class="notes-col">
+          <div class="summary-box">上课时教练从 <code>/admin/ts-care/live</code> 点当日课堂的「Enter class」，一屏完成点名、加分与看聊天室。</div>
+          <div class="steps-list">
+            <div class="step-item"><span class="step-num">1</span><div>顶部可搜寻学生/组别或点「All groups / Odd / Even」，选分数后按「Add」即时加分（10 秒内可 Undo）。</div></div>
+            <div class="step-item"><span class="step-num gold">2</span><div>按「Join as assistant」让静音助手进入 Zoom 抓取出席名单；右侧「Class chat」同步显示课堂留言。</div></div>
+          </div>
+          <div class="tip-box">系统每 15 秒自动同步本堂组别与学生得分；学生端学习页也会实时看到自己组别这一期的分数。</div>
+        </div>
+        <div class="shot-col">
+          <img src="assets/annotated/t4_s5_live_class.png" alt="Live 直播课页" onclick="openZoom(this.src)" />
+          <span class="shot-caption">点击图片可放大检视</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-topic="4">
+      <div class="slide-header">
+        <div class="slide-title-group">
+          <span class="topic-tag">主题 4 · Students Behaviour</span>
+          <h2 class="slide-title">4.4 学生个人 Care 关怀页与 Health light</h2>
         </div>
         <span class="role-badge">适用：Care / 教练</span>
       </div>
       <div class="slide-body">
         <div class="notes-col">
-          <div class="summary-box">在学生档案按「Care record」或从名单点入学生关怀页（<code>/admin/ts-care/student/{id}</code>），完整掌握出席与追踪记录。</div>
+          <div class="summary-box">在学生档案按「Care record」或进入 <code>/admin/ts-care/student/{id}</code>，完整掌握联络记录、出席与跟进排程。</div>
           <div class="steps-list">
             <div class="step-item"><span class="step-num">1</span><div>顶部「+ Log a contact」记录联络类型、学生近况、家长回馈与下次跟进日，按「Save entry」存档。</div></div>
             <div class="step-item"><span class="step-num gold">2</span><div>右侧「Learning history」展开各期每堂的 Zoom 时长、功课状态与 Poll 互动。</div></div>
@@ -957,9 +1005,9 @@
             <p>永久换班用「Change time」，临时旁听一堂用「Swap one」，剩余期数过户他人用「Transfer」，送出前一律先「Preview」。</p>
           </div>
           <div class="topic-card" style="cursor:default;">
-            <div class="num">待确认（由 Elson 现场补充）</div>
-            <h3>现场确认项目</h3>
-            <p>1. 测验汇入格式另有独立教程，本次不讲。<br>2. 「学生页面怎样换」是否需补充「Pause 暂停」或「Convert 换配套」示范。<br>3. Bana Games 资格范围（目前已对 11 月预习班新生开启免密 SSO）。</p>
+            <div class="num">RULE 04 · 加分与 Bana 口径</div>
+            <h3>现场执行标准</h3>
+            <p>1. 老师未说明加几分一律按「+30」；加错 10 秒内可 Undo；G01 线下组不入 Zoom 1。<br>2. 测验汇入格式另有独立教程，本次不讲。<br>3. Bana Games 目前已对 11 月预习班新生开启免密 SSO（正式班全面开放时间待公布）。</p>
           </div>
         </div>
         <div style="margin-top: 24px; display: flex; gap: 14px;">
